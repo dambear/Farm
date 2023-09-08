@@ -14,4 +14,8 @@ First of all make sure you have yarn installed. If you have it you can create a 
 
 ![Use this template](https://i.imgur.com/Gtt5CPx.png)
 
-After clonning it, you can simply go to the folder and type `yarn` to install the dependencies.
+After clonning it, you can simply go to the folder and type `npm install` to install the dependencies.
+
+`npm run dev` to run the app
+
+Requirements >>>>> `https://nodejs.org/en`
