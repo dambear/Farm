@@ -23,12 +23,12 @@ function Sidebar() {
           </Link>
         </li>
         <li className="mb-2">
-          <Link href="#" className="flex items-center p-2 hover:bg-gray-200 rounded">
+          <Link to="#" className="flex items-center p-2 hover:bg-gray-200 rounded">
             <span className="mr-2">🔔</span> New Alert
           </Link>
         </li>
         <li className="mb-2">
-          <Link href="/farmer" className="flex items-center p-2 hover:bg-gray-200 rounded">
+          <Link to="/farmer" className="flex items-center p-2 hover:bg-gray-200 rounded">
             <span className="mr-2">👦</span> Farmer
           </Link>
         </li>
