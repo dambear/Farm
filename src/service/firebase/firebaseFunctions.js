@@ -1,5 +1,7 @@
 // src/firebaseFunctions.js
-import { getFirestore, collection, setDoc, query, where, getDocs, doc } from 'firebase/firestore';
+import { getFirestore, collection, deleteDoc, updateDoc, setDoc, query, where, getDocs, doc } from 'firebase/firestore';
+
+
 
 import app from './firebase';
 
@@ -13,7 +15,7 @@ const db = getFirestore(app);
 //add farmer
 let farmSID = 101; // Initialize the ID counter
 
-export const addFarmer = async (first_name, last_name, contact_number, age) => {
+export const addFarmerData = async (first_name, last_name, contact_number, age) => {
   try {
     // Check if the ID is available, incrementing until a unique ID is found
     let farmer_id = String(farmSID); // Convert the ID to a string
@@ -49,6 +51,43 @@ export const addFarmer = async (first_name, last_name, contact_number, age) => {
 };
 
 
+//update farmer data
+export const updateFarmerData = async (farmer_id, updatedData) => {
+  try {
+    if (!farmer_id) {
+      throw new Error('Invalid farmer ID');
+    }
+
+    console.log('Updating Farmer with ID:', farmer_id); // Check the value of farmer_id
+
+    const farmerRef = doc(db, 'Farmer', farmer_id);
+
+    // Update the document with the provided data
+    await setDoc(farmerRef, updatedData); // Use setDoc instead of updateDoc if you intend to overwrite the entire document
+
+    console.log(`Successfully updated farmer with ID: ${farmer_id}`);
+  } catch (error) {
+    console.error('Error updating farmer: ', error);
+    throw error; // You can choose to re-throw the error to handle it in the component
+  }
+};
+
+
+
+
+//delete farmer data
+export const deleteFarmerData = async (farmer_id) => {
+  try {
+    const farmerRef = doc(db, 'Farmer', farmer_id);
+    await deleteDoc(farmerRef);
+    console.log(`Successfully deleted farmer with ID: ${farmer_id}`);
+  } catch (error) {
+    console.error('Error deleting farmer: ', error);
+    throw error; // You can choose to re-throw the error to handle it in the component
+  }
+};
+
+
 
 
 //get FarmerData
@@ -63,3 +102,6 @@ export const fetchFarmerData = async () => {
 
   return farmerData;
 };
+
+
+

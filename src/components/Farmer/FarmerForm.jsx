@@ -1,6 +1,6 @@
 // src/components/FarmerForm.js
 import React, { useState } from 'react';
-import { addFarmer } from '../service/firebaseFunctions';
+import { addFarmerData } from '../service/firebaseFunctions';
 
 function FarmerForm() {
   const [first_name, setFirstName] = useState('');
@@ -25,7 +25,7 @@ function FarmerForm() {
       return;
     }
 
-    const docId = await addFarmer(first_name, last_name, contact_number, age);
+    const docId = await addFarmerData(first_name, last_name, contact_number, age);
     if (docId) {
       alert(`Farmer added with ID: ${docId}`);
       // Clear input fields
@@ -37,6 +37,7 @@ function FarmerForm() {
       alert('Failed to add farmer. Please try again.');
     }
   };
+
 
   return (
     <div className="p-4 max-w-md mx-auto bg-white rounded shadow-md">
