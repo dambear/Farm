@@ -47,6 +47,7 @@ export const addFarmerData = async (first_name, last_name, contact_number, age) 
   } catch (error) {
     console.error('Error adding farmer: ', error);
     return null;
+    
   }
 };
 

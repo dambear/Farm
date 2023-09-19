@@ -1,6 +1,6 @@
 // src/components/FarmerForm.js
 import React, { useState } from 'react';
-import { addFarmerData } from '../service/firebaseFunctions';
+import { addFarmerData } from '../../service/firebase/firebaseFunctions';
 
 function FarmerForm() {
   const [first_name, setFirstName] = useState('');

@@ -1,6 +1,6 @@
 // src/components/FarmerTable.js
 import React, { useEffect, useState } from 'react';
-import { fetchFarmerData, deleteFarmerData, updateFarmerData} from '../service/firebaseFunctions';
+import { fetchFarmerData, deleteFarmerData, updateFarmerData} from '../../service/firebase/firebaseFunctions';
 
 import UpdateFarmerModal from './UpdateFarmerModal'
 
