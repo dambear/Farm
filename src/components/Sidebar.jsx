@@ -38,6 +38,11 @@ function Sidebar() {
           </a>
         </li>
         <li className="mb-2">
+          <Link to="/soilmodule" className="flex items-center p-2 hover:bg-gray-200 rounded">
+            <span className="mr-2">🌾</span> Soil Module
+          </Link>
+        </li>
+        <li className="mb-2">
           <a href="#" className="flex items-center p-2 hover:bg-gray-200 rounded">
             <span className="mr-2">⚙️</span> Setting
           </a>

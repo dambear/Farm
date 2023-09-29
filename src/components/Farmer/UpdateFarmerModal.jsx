@@ -1,6 +1,8 @@
 import React from 'react';
 import { updateDoc } from 'firebase/firestore';
 
+/*UPDATE*/
+
 function UpdateFarmerModal({ farmer, editedData, setEditedData, handleSave, handleCloseModal }) {
 
     
@@ -27,10 +29,10 @@ function UpdateFarmerModal({ farmer, editedData, setEditedData, handleSave, hand
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 ">
             <div className="bg-white p-6 rounded-lg w-96">
                 <h2 className="text-xl font-semibold mb-4">Edit Farmer</h2>
-                <form onSubmit={handleModalSubmit}>
+                <form onSubmit={handleModalSubmit} >
                     <div className="mb-4">
                         <label className="block mb-2">First Name</label>
                         <input

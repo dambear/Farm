@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Farmer from './pages/Farmer';
 import NewFarmer from './pages/NewFarmer';
+import SoilModule from './pages/SoilModule';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/farmer" element={<Farmer />} />
         <Route path="/newfarmer" element={<NewFarmer />} />
+        <Route path="/soilmodule" element={<SoilModule />} />
       </Routes>
     </div>
     </Router>
