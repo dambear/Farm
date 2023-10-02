@@ -4,7 +4,10 @@ import React, { useState, useEffect } from "react"
 
 import { fetchWeatherData } from "../../service/firebase/weatherFunctions"
 
-import { getIcon } from "../../utils/weather/weatherUtils";
+import {
+  getIcon,
+  prettyPrintWeatherCode,
+} from "../../utils/weather/weatherUtils"
 
 const WeatherWeekly = () => {
   const [weatherData, setWeatherData] = useState()
@@ -24,22 +27,31 @@ const WeatherWeekly = () => {
 
   //get the weather current data
 
-
-
   const weather = weatherData[0].weekly.timelines.daily
 
-  console.log(weather)
+
+  // weeks
+  const weekDays = (inputWeeks) => {
+    const options = {
+      weekday: "long",
+    }
+    const formattedWeeks = new Date(inputWeeks).toLocaleDateString(
+      "en-US",
+      options
+    )
+
+    return formattedWeeks
+  }
 
   function formatDate(inputDate) {
     const options = {
-      weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-      timeZone: 'Asia/Manila', // Set to Philippines timezone
+      // hour: "numeric",
+      // minute: "numeric",
+      // hour12: true,
+      // timeZone: 'Asia/Manila',  Set to Philippines timezone
     }
 
     const formattedDate = new Date(inputDate).toLocaleDateString(
@@ -54,23 +66,33 @@ const WeatherWeekly = () => {
   const weeklyWeather = weather.slice(1, 6)
 
   return (
-    <div className="grid h-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div className="grid h-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
       {weeklyWeather.map((daily, index) => (
-        <div key={index} className="bg-white rounded-md p-4 shadow-md">
-          <h2 className="text-lg font-semibold">{formatDate(daily.time)}</h2>
-          {/* <p className="text-gray-600">{prettyPrintWeatherCode(daily.weatherCodeMin)}</p> */}
-          <div className="flex items-center mt-2">
+        <div
+          key={index}
+          className="bg-white rounded-3xl p-4 h-48 m-auto mx-2 shadow-md"
+        >
+          <div className="flex flex-col items-center">
             <img
-              className="w-8 h-8 mr-2"
-              src={`../../static/icons/${getIcon(daily.weatherCodeMax)}`}// Use the actual image source here
-              alt={daily.weatherCodemax}
+              className="w-12 h-12 mr-2 mb-2 "
+              src={getIcon(daily.values.weatherCodeMax)}
+              alt={daily.values.weatherCodemax}
             />
-            <p className="text-blue-600">{daily.values.temperatureMax}°C</p>
+            <p className="text-gray-600 text-center  ">
+              {prettyPrintWeatherCode(daily.values.weatherCodeMax)}
+            </p>
+            <span className="text-blue-600 text-xl font-semibold mb-4">
+              {daily.values.temperatureMax}°C
+            </span>
           </div>
+          <h2 className="text-center font-semibold">{weekDays(daily.time)}</h2>
+          <h2 className="text-sm text-center text-gray-500 mb-4">
+            {formatDate(daily.time)}
+          </h2>
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
 export default WeatherWeekly

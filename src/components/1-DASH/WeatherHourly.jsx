@@ -20,12 +20,6 @@ const WeatherHourly = () => {
     return <div>Loading...</div> // You can display a loading message or handle this case as needed.
   }
 
-  //get the weather current data
-
-  const date = weatherData[0].current.data.time
-
-  const weather = weatherData[0].current.data.values
-  console.log(weatherData)
 
   function formatDate(inputDate) {
     const options = {
@@ -45,15 +39,34 @@ const WeatherHourly = () => {
     return formattedDate
   }
 
-  return (
-    <div className="bg-white p-4 shadow-md">
 
-      {/* use format datee function */}
-      <p>{formatDate(date)}</p>
-      <p>{weather.temperature}°C</p>
+  // Extract the date-time array from weatherData
+  const weather = weatherData[0].hourly.timelines.hourly
+
+  
+
+  const hourlyData = weather.slice(0,8)
+
+  return (
+    <div className="grid h-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
+      {hourlyData.map((hour, index) => (
+        <div
+          key={index}
+          className="bg-white rounded-3xl p-4 h-48 m-auto mx-2 shadow-md"
+        >
+          
+            
+            <span className="text-blue-600 text-xl font-semibold mb-4">
+              {hour.values.temperature }°C
+            </span>
+        
+          <h2 className="text-sm text-center text-gray-500 mb-4">
+            {formatDate(hour.time)}
+          </h2>
+        </div>
+      ))}
     </div>
   )
 }
 
-export default WeatherHourly 
-
+export default WeatherHourly

@@ -1,41 +1,68 @@
 
+import clearDay from "../../static/icons/clear_day.svg";
+import cloudy from "../../static/icons/cloudy.svg";
+import mostlyClearDay from "../../static/icons/mostly_clear_day.svg";
+import partlyCloudyDay from "../../static/icons/partly_cloudy_day.svg";
+import mostlyCloudy from "../../static/icons/mostly_cloudy.svg";
+import fog from "../../static/icons/fog.svg";
+import fogLight from "../../static/icons/fog_light.svg";
+import drizzle from "../../static/icons/drizzle.svg";
+import rain from "../../static/icons/rain.svg";
+import rainLight from "../../static/icons/rain_light.svg";
+import rainHeavy from "../../static/icons/rain_heavy.svg";
+import snow from "../../static/icons/snow.svg";
+import flurries from "../../static/icons/flurries.svg";
+import snowLight from "../../static/icons/snow_light.svg";
+import snowHeavy from "../../static/icons/snow_heavy.svg";
+import freezingDrizzle from "../../static/icons/freezing_drizzle.svg";
+import freezingRain from "../../static/icons/freezing_rain.svg";
+import freezingRainLight from "../../static/icons/freezing_rain_light.svg";
+import freezingRainHeavy from "../../static/icons/freezing_rain_heavy.svg";
+import icePellets from "../../static/icons/ice_pellets.svg";
+import icePelletsHeavy from "../../static/icons/ice_pellets_heavy.svg";
+import icePelletsLight from "../../static/icons/ice_pellets_light.svg";
+import tstorm from "../../static/icons/tstorm.svg";
 
-const weatherIcons = {
-  1000: require("../../static/icons/clear_day.svg"),
-  1001: require("../../static/icons/cloudy.svg"),
-  1100: require("../../static/icons/mostly_clear_day.svg"),
-  1101: require("../../static/icons/partly_cloudy_day.svg"),
-  1102: require("../../static/icons/mostly_cloudy.svg"),
-  2000: require("../../static/icons/fog.svg"),
-  2100: require("../../static/icons/fog_light.svg"),
-  // 3000: "Light Wind",
-  // 3001: "Wind",
-  // 3002: "Strong Wind",
-  4000: require("../../static/icons/drizzle.svg"),
-  4001: require("../../static/icons/rain.svg"),
-  4200: require("../../static/icons/rain_light.svg"),
-  4201: require("../../static/icons/rain_heavy.svg"),
-  5000: require("../../static/icons/snow.svg"),
-  5001: require("../../static/icons/flurries.svg"),
-  5100: require("../../static/icons/snow_light.svg"),
-  5101: require("../../static/icons/snow_heavy.svg"),
-  6000: require("../../static/icons/freezing_drizzle.svg"),
-  6001: require("../../static/icons/freezing_rain.svg"),
-  6200: require("../../static/icons/freezing_rain_light.svg"),
-  6201: require("../../static/icons/freezing_rain_heavy.svg"),
-  7000: require("../../static/icons/ice_pellets.svg"),
-  7101: require("../../static/icons/ice_pellets_heavy.svg"),
-  7102: require("../../static/icons/ice_pellets_light.svg"),
-  8000: require("../../static/icons/tstorm.svg"),
-}
-
-// get the photo of weather base on weather code
+// get the photo of weather based on weather code
 export function getIcon(weatherCode) {
-  return weatherIcons[weatherCode]
+  const weatherIcons = {
+    1000: clearDay,
+    1001: cloudy,
+    1100: mostlyClearDay,
+    1101: partlyCloudyDay,
+    1102: mostlyCloudy,
+    2000: fog,
+    2100: fogLight,
+    // 3000: "Light Wind",
+    // 3001: "Wind",
+    // 3002: "Strong Wind",
+    4000: drizzle,
+    4001: rain,
+    4200: rainLight,
+    4201: rainHeavy,
+    5000: snow,
+    5001: flurries,
+    5100: snowLight,
+    5101: snowHeavy,
+    6000: freezingDrizzle,
+    6001: freezingRain,
+    6200: freezingRainLight,
+    6201: freezingRainHeavy,
+    7000: icePellets,
+    7101: icePelletsHeavy,
+    7102: icePelletsLight,
+    8000: tstorm,
+  };
+
+  return weatherIcons[weatherCode];
 }
+
+
+
+
 
 // description base on weather code
-export const prettyPrintWeatherCode = async (code) => {
+export function prettyPrintWeatherCode(code) {
   const weatherCodes = {
     0: "Unknown",
     1000: "Clear",
@@ -65,5 +92,5 @@ export const prettyPrintWeatherCode = async (code) => {
     7102: "Light Ice Pellets",
     8000: "Thunderstorm",
   }
-  return weatherCodes[code.toString()]
+  return weatherCodes[code]
 }

@@ -1,0 +1,80 @@
+{
+    "timelines": {
+      "hourly": [
+        {
+          "time": "2023-09-29T12:00:00Z",
+          "values": {
+            "cloudBase": 0.23,
+            "cloudCeiling": 0.23,
+            "cloudCover": 98,
+            "dewPoint": 25.13,
+            "evapotranspiration": 0.012,
+            "freezingRainIntensity": 0,
+            "humidity": 90,
+            "iceAccumulation": 0,
+            "iceAccumulationLwe": 0,
+            "precipitationProbability": 0,
+            "pressureSurfaceLevel": 991.17,
+            "rainAccumulation": 0,
+            "rainAccumulationLwe": 0,
+            "rainIntensity": 0,
+            "sleetAccumulation": 0,
+            "sleetAccumulationLwe": 0,
+            "sleetIntensity": 0,
+            "snowAccumulation": 0,
+            "snowAccumulationLwe": 0,
+            "snowIntensity": 0,
+            "temperature": 26.88,
+            "temperatureApparent": 30.38,
+            "uvHealthConcern": 0,
+            "uvIndex": 0,
+            "visibility": 16,
+            "weatherCode": 1001,
+            "windDirection": 52.13,
+            "windGust": 1.81,
+            "windSpeed": 1
+          }
+        },
+        {
+          "time": "2023-09-29T13:00:00Z",
+          "values": {
+            "cloudBase": 0.71,
+            "cloudCeiling": 11.24,
+            "cloudCover": 100,
+            "dewPoint": 24.2,
+            "evapotranspiration": 0.013,
+            "freezingRainIntensity": 0,
+            "humidity": 92.8,
+            "iceAccumulation": 0,
+            "iceAccumulationLwe": 0,
+            "precipitationProbability": 0,
+            "pressureSurfaceLevel": 991.75,
+            "rainAccumulation": 0,
+            "rainAccumulationLwe": 0,
+            "rainIntensity": 0,
+            "sleetAccumulation": 0,
+            "sleetAccumulationLwe": 0,
+            "sleetIntensity": 0,
+            "snowAccumulation": 0,
+            "snowAccumulationLwe": 0,
+            "snowIntensity": 0,
+            "temperature": 25.46,
+            "temperatureApparent": 25.46,
+            "uvHealthConcern": 0,
+            "uvIndex": 0,
+            "visibility": 16,
+            "weatherCode": 1001,
+            "windDirection": 89.99,
+            "windGust": 1.18,
+            "windSpeed": 0.89
+          }
+        }
+      ]
+    },
+    "location": {
+      "lat": 13.755871772766113,
+      "lon": 121.05847930908203,
+      "name": "Batangas, Calabarzon, 4200, Philippines",
+      "type": "administrative"
+    }
+  }

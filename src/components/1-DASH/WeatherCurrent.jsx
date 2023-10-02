@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react"
 
 import { fetchWeatherData } from "../../service/firebase/weatherFunctions"
 
+import { prettyPrintWeatherCode } from "../../utils/weather/weatherUtils"
+
 const WeatherCurrent = () => {
   const [weatherData, setWeatherData] = useState()
 
@@ -22,38 +24,39 @@ const WeatherCurrent = () => {
 
   //get the weather current data
 
-  const date = weatherData[0].current.data.time
+  // const date = weatherData[0].current.data.time
 
   const weather = weatherData[0].current.data.values
 
-  // const weather = weatherData[0].weekly.timelines.daily
-  
-  
+  // function formatDate(inputDate) {
+  //   const options = {
+  //     weekday: "long",
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "numeric",
+  //     hour: "numeric",
+  //     minute: "numeric",
+  //   }
 
-  function formatDate(inputDate) {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    }
+  //   const formattedDate = new Date(inputDate).toLocaleDateString(
+  //     "en-US",
+  //     options
+  //   )
 
-    const formattedDate = new Date(inputDate).toLocaleDateString(
-      "en-US",
-      options
-    )
-
-    return formattedDate
-  }
+  //   return formattedDate
+  // }
 
   return (
-    <div className="bg-white p-4 shadow-md">
+    <div className="text-gray-800 h-full p-5 rounded-l-[20px]">
+      <h2 className="text-base text-gray">Batangas City</h2>
+      <h1 className="text-6xl font-bold mt-4">{weather.temperature}°C</h1>
+      <div className=" mt-4 ">
+        <p className="text-gray-400 font-medium">Today</p>
 
-      {/* use format datee function */}
-      <p>{formatDate(date)}</p>
-      <p>{weather.temperature}°C</p>
+        <p className="text-xl mb-2 font-bold">
+          {prettyPrintWeatherCode(weather.weatherCode)}
+        </p>
+      </div>
     </div>
   )
 }

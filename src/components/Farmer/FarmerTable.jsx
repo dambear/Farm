@@ -112,7 +112,7 @@ function FarmerTable() {
           </thead>
 
           {/*TABLE BODY*/}
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-100 ">
             {farmerData.map((farmer) => (
               <tr key={farmer.farmer_id}>
                 <td className="p-3 text-sm font-bold text-blue-500 ">

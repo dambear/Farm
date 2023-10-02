@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="bg-white w-1/6 h-screen fixed p-6 shadow-lg">
+    <div className="bg-gray-300 w-1/6 h-screen fixed p-6 shadow-lg">
       <div className="name_logo w-11/12 mx-auto">
         {/* You can replace this with your logo */}
         Farmwise
