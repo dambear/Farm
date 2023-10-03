@@ -13,7 +13,7 @@ function Home() {
   }, [])
 
   return (
-    <div className="bg-white absolute right-0 w-5/6 h-screen">
+    <div className="absolute right-0 w-5/6 h-screen">
       <div className="container mx-auto p-7">
         <div className="bg-gradient-to-r from-[#F5FAD1] via-teal-100 to-cyan-100 flex items-center justify-center relative  rounded-[20px] ">
           <div className="h-60 w-1/4 ">

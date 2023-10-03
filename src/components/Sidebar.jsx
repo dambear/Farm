@@ -3,69 +3,52 @@ import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="bg-gray-300 w-1/6 h-screen fixed p-6 shadow-lg">
-      <div className="name_logo w-11/12 mx-auto">
+    <div className="bg-white w-1/6 h-screen fixed shadow-2xl">
+      <div className="name_logo text-black font-semibold p-4 text-xl w-11/12 mx-auto">
         {/* You can replace this with your logo */}
         Farmwise
       </div>
-      <ul className="mt-10">
+
+      <nav className="flex flex-col flex-1 pr-9 oveflow-auto">
+        <ul className="mt-5">
+          <li className="mb-2">
+            <Link to="/" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
+              <span className="mr-2">📊</span> Dashboard
+            </Link>
+          </li>
+
         <li className="mb-2">
-          <Link
-            to="/"
-            className="flex items-center p-2 hover:bg-gray-200 rounded"
-          >
-            <span className="mr-2">📊</span> Dashboard
-          </Link>
-        </li>
-        <li className="mb-2">
-          <Link
-            to="about"
-            className="flex items-center p-2 hover:bg-gray-200 rounded"
-          >
+          <Link to="about" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
             <span className="mr-2">🚨</span> Alert
           </Link>
         </li>
         <li className="mb-2">
-          <Link
-            to="#"
-            className="flex items-center p-2 hover:bg-gray-200 rounded"
-          >
+          <Link to="#" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
             <span className="mr-2">🔔</span> New Alert
           </Link>
         </li>
         <li className="mb-2">
-          <Link
-            to="/farmer"
-            className="flex items-center p-2 hover:bg-gray-200 rounded"
-          >
+          <Link to="/farmer" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
             <span className="mr-2">👦</span> Farmer
           </Link>
         </li>
         <li className="mb-2">
-          <a
-            href="/newfarmer"
-            className="flex items-center p-2 hover:bg-gray-200 rounded"
-          >
+          <a href="/newfarmer" className="nav-link hover:text-white  font-semibold hover:bg-emerald-400">
             <span className="mr-2">🌾</span> New Farmer
           </a>
         </li>
         <li className="mb-2">
-          <Link
-            to="/soilmodule"
-            className="flex items-center p-2 hover:bg-gray-200 rounded"
-          >
+          <Link to="/soilmodule" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
             <span className="mr-2">🌾</span> Soil Module
           </Link>
         </li>
         <li className="mb-2">
-          <a
-            href="#"
-            className="flex items-center p-2 hover:bg-gray-200 rounded"
-          >
+          <a href="#" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
             <span className="mr-2">⚙️</span> Setting
           </a>
         </li>
-      </ul>
+        </ul>
+      </nav>
     </div>
   );
 }
