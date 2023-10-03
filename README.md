@@ -18,6 +18,8 @@ Before Start making changes >>>> mag create muna ng branch >>> `git checkout -b 
 
   `git branch branch_name` = create new branch
 
+  
+  `git pull` = para ma pull yung mga bagong update
 
   `node server.js` to run the server to function sms 
 
