@@ -6,6 +6,13 @@ import { fetchWeatherData } from "../../service/firebase/weatherFunctions"
 
 import { prettyPrintWeatherCode } from "../../utils/weather/weatherUtils"
 
+import windspeedImg from "../../static/asset/windspeed.png"
+import humidityImg from "../../static/asset/humidity.png"
+import tempImg from "../../static/asset/temperature.png"
+import cloudcoverImg from "../../static/asset/cloudcover.png"
+import sunsetImg from "../../static/asset/sunset.png"
+import sunriseImg from "../../static/asset/sunrise.png"
+
 const WeatherHighlight = () => {
   const [weatherData, setWeatherData] = useState()
 
@@ -50,40 +57,67 @@ const WeatherHighlight = () => {
 
   const weekly = weatherData[0].weekly.timelines.daily[0].values
 
-  
-
   return (
-    <div className="bg-red-300 w-full h-full grid grid-cols-3 grid-rows-2 flex-wrap ">
-      <div className="h-48 mr-2 mb-2 bg-green-500 rounded-full">
-        <p>{weather.temperature}</p>
+    <div className=" w-full h-full grid grid-cols-3 grid-rows-2 flex-wrap ">
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-gradient-to-r from-sky-200 to-rose-300 hover:text-white duration-300 h-48 mr-2 mb-2 bg-purple-50 rounded-[20px] shadow-lg">
+        <div className="flex m-auto p-4">
+          <img src={tempImg} alt="humidity" className="w-12 h-12" />
+          <h2 className="text-xl font-bold  p-2">Temperature</h2>
+        </div>
+
+        <p className="text-white:base text-center text-4xl font-bold">
+          {weather.temperature}
+        </p>
       </div>
 
-      <div className="h-48  ml-2 mr-2 mb-2 bg-blue-300 rounded-[20px] text-center shadow-lg">
-        <h2 className="m-2 text-xl font-bold">Wind Speed</h2>
-        <p>{weather.windSpeed}</p>
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-blue-200 duration-300 h-48 hover:text-white  ml-2 mr-2 mb-2  rounded-[20px] text-center shadow-lg bg-purple-50">
+        <div className="flex m-auto p-4">
+          <img src={windspeedImg} alt="humidity" className="w-12 h-12" />
+          <h2 className="text-xl font-bold  p-2">WindSpeed</h2>
+        </div>
+        <p className="text-white:base text-center text-4xl font-bold">
+          {weather.windSpeed}
+        </p>
       </div>
 
-      <div className="h-48 ml-2 mb-2 bg-blue-300 rounded-tl-full rounded-tr-full  ">
-        {weather.cloudCover}
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-yellow-300 hover:text-white duration-300 h-48 mr-2 mt-2 bg-white rounded-[20px]  shadow-lg">
+        <div className="flex m-auto p-4">
+          <img src={sunriseImg} alt="humidity" className="w-12 h-12" />
+          <h2 className="text-xl font-bold  p-2">Sunrise</h2>
+        </div>
+        <p className="text-white:base text-center text-4xl font-bold">
+          {formatTime(weekly.sunriseTime)}
+        </p>
       </div>
 
-      <div className=" h-48 mr-2 mt-2 bg-blue-300 ">
-        <h2>humidity</h2>
-        <p>{weather.humidity}</p>
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-violet-200 duration-200 hover:shadow-violet-100 hover:shadow-blur-lg hover:text-white h-48 mr-2 mt-2 bg-purple-50 rounded-[20px]  shadow-lg">
+        <div className="flex m-auto p-4">
+          <img src={humidityImg} alt="humidity" className="w-12 h-12" />
+          <h2 className="text-xl font-bold  p-2">Humidity</h2>
+        </div>
+        <p className="text-white:base text-center text-4xl font-bold">
+          {weather.humidity}%
+        </p>
       </div>
 
-      <div className="h-48 mx-2 mt-2 bg-blue-300 rounded-tr-full rounded-br-full ">
-        {weather.visibility}
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-yellow-400 hover:text-white duration-200  h-48 mx-2 mt-2 bg-purple-50 rounded-[20px] shadow-lg ">
+        <div className="flex m-auto p-4">
+          <img src={cloudcoverImg} alt="humidity" className="w-12 h-12" />
+          <h2 className="text-xl font-bold  p-2">CloudCover</h2>
+        </div>
+        <p className="text-center text-white:base text-4xl font-bold">
+          {weather.cloudCover}%
+        </p>
       </div>
 
-      <div className="h-48 ml-2 mt-2 bg-blue-300  rounded-3xl ">
-        sunrise
-        {formatTime(weekly.sunriseTime)}
-        <h2>
-          {" "}
-          sunshessh
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-gray-900 hover:text-white duration-200  h-48 mr-2 mt-2 bg-white rounded-[20px]  shadow-lg">
+        <div className="flex m-auto p-4">
+          <img src={sunsetImg} alt="humidity" className="w-12 h-12" />
+          <h2 className="text-xl font-bold  p-2">Sunset</h2>
+        </div>
+        <p className=" text-center text-white:base text-4xl font-bold">
           {formatTime(weekly.sunsetTime)}
-        </h2>
+        </p>
       </div>
     </div>
   )

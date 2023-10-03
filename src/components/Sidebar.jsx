@@ -18,7 +18,7 @@ function Sidebar() {
           </li>
 
         <li className="mb-2">
-          <Link to="about" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
+          <Link to="alert" className="nav-link hover:text-white font-semibold hover:bg-emerald-400">
             <span className="mr-2">🚨</span> Alert
           </Link>
         </li>
