@@ -7,19 +7,9 @@ import {
   updateFarmerData,
 } from "../../service/firebase/firebaseFunctions"
 
-import UpdateFarmerModal from "./UpdateFarmerModal"
 
-function FarmerTable() {
+function AlertHistoryTable() {
   const [farmerData, setFarmerData] = useState([])
-
-  const [editingFarmer, setEditingFarmer] = useState(null)
-
-  const [editedData, setEditedData] = useState({
-    first_name: "",
-    last_name: "",
-    contact_number: "",
-    age: 0,
-  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,51 +20,12 @@ function FarmerTable() {
     fetchData()
   }, [])
 
-  const handleDelete = async (farmer_id) => {
-    try {
-      // Call the handleDeleteFarmer function from firebaseFunctions.js
-      await deleteFarmerData(farmer_id)
 
-      // After deletion, you can fetch the updated data and update the state
-      const updatedData = await fetchFarmerData()
-      setFarmerData(updatedData)
-    } catch (error) {
-      console.error("Error deleting farmer: ", error)
-    }
-  }
 
-  const handleEdit = (farmer) => {
-    setEditingFarmer(farmer)
-    setEditedData({
-      farmer_id: farmer.farmer_id,
-      first_name: farmer.first_name,
-      last_name: farmer.last_name,
-      contact_number: farmer.contact_number,
-      age: farmer.age,
-    })
-  }
 
-  const handleSave = async () => {
-    try {
-      if (editingFarmer) {
-        console.log("Editing Farmer ID:", editingFarmer.farmer_id) // Check the value
 
-        // Call the updateFarmerData function from firebaseFunctions.js
-        await updateFarmerData(editingFarmer.farmer_id, editedData)
 
-        // After updating, close the modal and fetch the updated data
-        setEditingFarmer(null)
-        const updatedData = await fetchFarmerData()
-        setFarmerData(updatedData)
-      }
-    } catch (error) {
-      console.error("Error updating farmer: ", error)
-    }
-  }
 
-  const handleCloseModal = () => {
-    setEditingFarmer(null)
-  }
 
   return (
     <div className="p-4 ">
@@ -144,17 +95,9 @@ function FarmerTable() {
         </table>
       </div>
 
-      {editingFarmer && (
-        <UpdateFarmerModal
-          farmer={editingFarmer}
-          editedData={editedData}
-          setEditedData={setEditedData}
-          handleSave={handleSave}
-          handleCloseModal={handleCloseModal}
-        />
-      )}
+      
     </div>
   )
 }
 
-export default FarmerTable
+export default AlertHistoryTable

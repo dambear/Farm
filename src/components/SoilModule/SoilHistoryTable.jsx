@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { fetchSoilData } from './service/firebase/firebaseFunctions'; // Make sure to adjust the import path as needed
+import React, { useEffect, useState } from "react"
+import { fetchSoilData } from "../../service/firebase/soilmoduleFunctions" // Make sure to adjust the import path as needed
 
-import NutrientModal from './NutrientModal'; // Import the NutrientModal component
+import NutrientModal from "./NutrientModal" // Import the NutrientModal component
 
-function SoilTable() {
-  const [soilData, setSoilData] = useState([]);
-  const [selectedNutrientData, setSelectedNutrientData] = useState(null);
+function SoilHistoryTable() {
+  const [soilData, setSoilData] = useState([])
+  const [selectedNutrientData, setSelectedNutrientData] = useState(null)
 
   useEffect(() => {
     // Fetch soil data when the component mounts
     async function fetchData() {
-      const data = await fetchSoilData();
-      setSoilData(data);
+      const data = await fetchSoilData()
+      setSoilData(data)
     }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   // Function to handle opening the nutrient modal
   const openNutrientModal = (nutrientData) => {
-    setSelectedNutrientData(nutrientData);
-  };
+    setSelectedNutrientData(nutrientData)
+  }
 
   // Function to handle closing the nutrient modal
   const closeNutrientModal = () => {
-    setSelectedNutrientData(null);
-  };
+    setSelectedNutrientData(null)
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -48,7 +48,9 @@ function SoilTable() {
               <td className="py-2 px-4 border-b">{item.fland_name}</td>
               <td className="py-2 px-4 border-b">{item.fland_location}</td>
               <td className="py-2 px-4 border-b">{item.soil_quality}</td>
-              <td className="py-2 px-4 border-b">{item.soil_test_date.toDate().toLocaleDateString()}</td>
+              <td className="py-2 px-4 border-b">
+                {item.soil_test_date.toDate().toLocaleDateString()}
+              </td>
               <td className="py-2 px-4 border-b">
                 <button
                   className="bg-blue-500 text-white px-2 py-1 rounded"
@@ -62,10 +64,13 @@ function SoilTable() {
         </tbody>
       </table>
       {selectedNutrientData && (
-        <NutrientModal nutrientData={selectedNutrientData} onClose={closeNutrientModal} />
+        <NutrientModal
+          nutrientData={selectedNutrientData}
+          onClose={closeNutrientModal}
+        />
       )}
     </div>
-  );
+  )
 }
 
-export default SoilTable;
+export default SoilHistoryTable
