@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Alert from './pages/Alert';
 import Farmer from './pages/Farmer';
 import NewFarmer from './pages/NewFarmer';
-import SoilModule from './pages/SoilMonitoring';
+import SoilModule from './pages/Soil';
 
 function App() {
   return (

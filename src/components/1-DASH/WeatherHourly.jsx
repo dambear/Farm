@@ -54,7 +54,7 @@ const WeatherHourly = () => {
       {hourlyData.map((hour, index) => (
         <div key={index} className="bg-white p-4 ">
           <div className="flex flex-col items-center">
-            <h2 className="text-lg font-bold text-center text-gray-500 mb-4">
+            <h2 className="text-lg font-bold text-center text-black mb-4">
               {formatHour(hour.time)}
             </h2>
 
