@@ -40,7 +40,7 @@ function Home() {
         <div className=" flex relative mt-4">
           <p className="text-xl font-bold">Today's Temperature Prediction</p>
         </div>
-        <div className="bg-white rounded-lg border-r-4 border-r-sky-200 border-l-4 border-l-sky-200 sm:shadow-lg  flex items-center justify-center relative mt-10">
+        <div className="bg-white rounded-lg border-r-4 border-r-sky-200 border-l-4 border-l-sky-200 sm:shadow-lg  flex items-center  justify-center relative mt-10">
           <WeatherHourly />
         </div>
       </div>

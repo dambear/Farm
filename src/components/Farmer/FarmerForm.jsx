@@ -46,14 +46,13 @@ function FarmerForm() {
 
   return (
     <div className="p-4 max-w-md mx-auto bg-white border-2 shadow-lg rounded-lg mt-10 shadow-md">
-      <div></div>
-      <h2 className="text-xl font-semibold mb-4 flex items-c">
+      <h2 className="flex items-center text-xl font-Oswald mb-4">
         <BsFillClipboardPlusFill size="24" className="fill-green-500 mr-2" />
         Add a Farmer
       </h2>
       <form onSubmit={handleSubmit}>
         {/*FIRSTNAME*/}
-        <div className="relative mt-9">
+        <div className="relative mt-10">
           <input
             id="firstname"
             type="text"
@@ -66,7 +65,7 @@ function FarmerForm() {
             for="firstname"
             className="absolute left-2 -top-7 text-gray-600 text-sm 
           transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
-          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-sm font-semibold"
+          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-lg font-Gabarito"
           >
             Enter Firstname:
           </label>
@@ -86,7 +85,7 @@ function FarmerForm() {
             for="lastname"
             className="absolute left-2 -top-7 text-gray-600 text-sm 
           transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
-          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-sm font-semibold"
+          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-lg font-Gabarito"
           >
             Enter Lastname:
           </label>
@@ -110,7 +109,7 @@ function FarmerForm() {
             for="contact"
             className="absolute left-2 -top-7 text-gray-600 text-sm 
           transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
-          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-sm font-semibold"
+          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-lg font-Gabarito"
           >
             Contact Number (11 digits):
           </label>
@@ -133,7 +132,7 @@ function FarmerForm() {
             for="age"
             className="absolute left-2 -top-7 text-gray-600 text-sm 
           transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 
-          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-sm font-semibold"
+          peer-placeholder-shown:top-2 peer-focus:-top-7 peer-focus:text-black peer-focus:text-lg font-Gabarito"
           >
             Age (1-2 digits):
           </label>
@@ -141,7 +140,8 @@ function FarmerForm() {
 
         <button
           type="submit"
-          className="bg-emerald-400 hover:bg-emerald-700  text-white mt-4 py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300"
+          className="text-white text-lg mt-3 font-semibold px-4 py-2 rounded-md mr-2 border-2 border-emerald-500 bg-emerald-500 
+          hover:bg-white hover:text-emerald-500 duration-300 ease-in-out hover:scale-110 hover:shadow-lg transition-colors"
         >
           Add Farmer
         </button>
