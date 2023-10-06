@@ -7,7 +7,6 @@ import {
   updateFarmerData,
 } from "../../service/firebase/firebaseFunctions"
 
-
 function AlertHistoryTable() {
   const [farmerData, setFarmerData] = useState([])
 
@@ -19,13 +18,6 @@ function AlertHistoryTable() {
 
     fetchData()
   }, [])
-
-
-
-
-
-
-
 
   return (
     <div className="p-4 ">
@@ -94,8 +86,6 @@ function AlertHistoryTable() {
           </tbody>
         </table>
       </div>
-
-      
     </div>
   )
 }
