@@ -32,7 +32,9 @@ function SoilHistoryTable() {
   return (
     <div className="container mx-auto p-4 ">
       <h1 className="text-2xl font-Oswald mb-4">Soil Data Table</h1>
-      <table className="min-w-full border shadow-md">
+
+      <div className="overflow-auto rounded-md">
+      <table className="min-w-full  border shadow-md">
         <thead className="bg-emerald-400">
           <tr>
             <th className="py-3 px-4 text-center text-lg font-Gabarito border-b">Land ID</th>
@@ -49,12 +51,12 @@ function SoilHistoryTable() {
               <td className="p-3 text-center text-lg font-semibold text-blue-500">
                 {item.fland_id}
               </td>
-              <td className="p-3 text-center text-lg text-black font-Opensans font-bold duration-100 hover:shadow-lg ease-in-out hover:scale-110">{item.fland_name}</td>
+              <td className="p-3 text-center text-lg text-black font-Opensans font-bold">{item.fland_name}</td>
               <td className="p-3 text-lg font-Opensans flex items-center justify-center ">
                   <CiLocationOn size="20" className="mr-2 "/>
                   {item.fland_location}
               </td>
-              <td className="p-3 text-center text-xl font-Bebasneue border-b duration-100 hover:shadow-lg ease-in-out hover:scale-110">
+              <td className="p-3 text-center text-xl font-Bebasneue border-bx">
                 {item.soil_quality}
               </td>
               <td className=" text-center border-b font-Bebasneue">
@@ -75,6 +77,7 @@ function SoilHistoryTable() {
           ))}
         </tbody>
       </table>
+      </div>
       {selectedNutrientData && (
         <NutrientModal
           nutrientData={selectedNutrientData}

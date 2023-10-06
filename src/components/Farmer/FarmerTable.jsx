@@ -116,7 +116,7 @@ function FarmerTable() {
         </button>
       </div>
 
-      <div className="rounded shadow">
+      <div className="overflow-auto rounded-md shadow-lg">
         {/*TABLE*/}
         <table className="min-w-full bg-white shadow-lg">
           {/*TABLE HEADER*/}
@@ -162,13 +162,13 @@ function FarmerTable() {
                 <td className="p-3 text-xl font-medium font-bold text-blue-500 text-center border-b">
                   {farmer.farmer_id}
                 </td>
-                <td className="p-3 text-xl font-semibold text-center text-black border-b duration-100 hover:shadow-lg ease-in-out hover:scale-110 ">
+                <td className="p-3 text-xl font-semibold text-center text-black border-b">
                   {farmer.first_name}
                 </td>
-                <td className="p-3 text-xl font-semibold text-center text-black border-b duration-100 hover:shadow-lg ease-in-out hover:scale-110 ">
+                <td className="p-3 text-xl font-semibold text-center text-black border-b">
                   {farmer.last_name}
                 </td>
-                <td className="p-3 text-2xl font-Bebasneue text-center text-black border-b duration-100 hover:shadow-lg ease-in-out hover:scale-110">
+                <td className="p-3 text-2xl font-Bebasneue text-center text-black border-b">
                     {farmer.age}
                 </td>
                 <td className="p-3 text-center justify-center text-xl font-medium text-center text-black border-b">
