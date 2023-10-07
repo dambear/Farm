@@ -5,7 +5,7 @@ import {
   BsPencilSquare,
   BsFillPersonVcardFill,
   BsFillTelephonePlusFill,
-  BsQuestionCircleFill,
+  BsSearch
 } from "react-icons/bs"
 import {
   fetchFarmerData,
@@ -18,6 +18,7 @@ import { addMessageData } from "../../service/firebase/alertFunctions"
 import UpdateFarmerModal from "./UpdateFarmerModal"
 
 function FarmerTable() {
+
   const [farmerData, setFarmerData] = useState([])
 
   const [editingFarmer, setEditingFarmer] = useState(null)
@@ -90,107 +91,103 @@ function FarmerTable() {
     // You can perform any actions or state updates here
   }
 
+  const [search, setSearch] = useState('');
+  console.log(search);
+
   return (
-    <div className="p-4 ">
+    <div className="p-4">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-bold mb-4">Farmer Table</h2>
+
+        <div className="flex items-center border-2 p-2 rounded-3xl border-emerald-300 ml-2 mb-4 bg-gray-100">
+          <BsSearch size="18" className="mr-2 fill-gray-500" />
+
+          <input 
+            type="search"
+            placeholder="Search..."
+            className="search text-black text-md focus:outline-none bg-gray-100  border-gray-500"
+            onChange={(e) => setSearch(e.target.value)}/>
+        </div>  
+
         <button
-          class="bg-emerald-400 hover:bg-emerald-700 text-white font-bold py-2 px-4 mb-4 rounded"
-          onClick={handleClick}
-        >
+          class="text-white font-semibold py-2 px-4 mb-4 rounded-md border-2 border-emerald-400 bg-emerald-400
+          hover:bg-white hover:text-emerald-400 hover:scale-110 hover:shadow-lg duration-300 ease-in-out"
+          onClick={handleClick}>
           Add Farmer
         </button>
       </div>
 
-      <div className="overflow-auto rounded-lg shadow">
+      <div className="overflow-auto rounded-md shadow-lg">
         {/*TABLE*/}
-        <table className="min-w-full bg-white">
+        <table className="min-w-full bg-white shadow-lg">
           {/*TABLE HEADER*/}
           <thead className="bg-emerald-400 shadow-md">
             <tr>
-              <th className="p-3 text-white text-lg font-semi-bold tracking-wide items-center flex justify-center">
-                <BsFillPersonVcardFill size="18" className="mr-1.5" />
-                ID
+              <th className="p-3 text-lg font-Gabarito">
+              <BsFillPersonVcardFill size="28" className="items-center ml-5"/>
               </th>
               <th
-                className="p-3 text-white text-lg fon
-              
-              t-semi-bold tracking-wide items-center justify-center"
-              >
+                className="p-3 text-lg font-Gabarito tracking-wide items-center justify-center">
                 First Name
               </th>
-              <th className="p-3 text-white text-lg font-semi-bold tracking-wide items-center justify-center">
+              <th className="p-3  text-lg font-Gabarito tracking-wide items-center justify-center">
                 Last Name
               </th>
-              <th className="p-3 text-white text-lg font-semi-bold tracking-wide items-center justify-center">
+              <th className="p-3  text-lg font-Gabarito tracking-wide items-center justify-center">
                 Age
               </th>
-              <th className="p-3 text-white text-lg font-semi-bold tracking-wide items-center justify-center">
+              <th className="p-3 text-lg font-Gabarito tracking-wide items-center justify-center">
                 Contact Number
               </th>
-              <th className="p-3 text-white text-lg font-semi-bold tracking-wide items-center flex justify-center">
+              <th className="p-3  text-lg font-Gabarito tracking-wide items-center flex justify-center">
                 Actions
-                <div className="tooltip">
-                  <BsQuestionCircleFill
-                    size="18"
-                    className="ml-1.5 hover:fill-emerald-700"
-                  />
-                  <span className="tooltip-text text-emerald-400 bg-white">
-                    <p className="flex font-semi-bold items-center">
-                      <BsPencilSquare
-                        size="24"
-                        className="fill-yellow-500 mr-1.5"
-                      />
-                      Edit the Data{" "}
-                    </p>
-                    <p className="flex items-center">
-                      <BsFillTrashFill
-                        size="24"
-                        className="fill-red-500 mr-1.5"
-                      />
-                      Delete the Data
-                    </p>
-                  </span>
-                </div>
               </th>{" "}
               {/* Add Actions column */}
             </tr>
           </thead>
 
           {/*TABLE BODY*/}
-          <tbody className="divide-y divide-gray-100 ">
-            {farmerData.map((farmer) => (
+          <tbody className="divide-y divide-gray-100">
+
+            {farmerData
+              .filter((farmer) => {
+                return search.toLowerCase() === ''
+                ? farmer
+                : farmer.first_name.toLowerCase().includes(search);
+              })
+              .map((farmer) => (
               <tr
                 key={farmer.farmer_id}
-                className="hover:bg-gray-200 border-b border-gray-300"
+                className="hover:bg-gray-100 border-b "
               >
-                <td className="p-3 text-xl font-medium  font-bold text-blue-500 text-center border">
+                <td className="p-3 text-xl font-medium font-bold text-blue-500 text-center border-b">
                   {farmer.farmer_id}
                 </td>
-                <td className="p-3 text-xl font-medium text-gray-700 text-center border text-black">
+                <td className="p-3 text-xl font-semibold text-center text-black border-b">
                   {farmer.first_name}
                 </td>
-                <td className="p-3 text-xl font-medium text-gray-700 text-center border text-black">
+                <td className="p-3 text-xl font-semibold text-center text-black border-b">
                   {farmer.last_name}
                 </td>
-                <td className="p-3 text-xl font-medium text-gray-700 text-center border text-black">
-                  {farmer.age}
+                <td className="p-3 text-2xl font-Bebasneue text-center text-black border-b">
+                    {farmer.age}
                 </td>
-                <td className="p-3 text-xl font-medium text-gray-700 text-center border text-black">
-                  <span className="p-1.5 text-xl font-medium uppercase tracking-wider text-emerald-800 bg-emerald-200 rounded-lg">
-                    {farmer.contact_number}
-                  </span>
+                <td className="p-3 text-center justify-center text-xl font-medium text-center text-black border-b">
+                <span className="flex items-center justify-center">
+                  <BsFillTelephonePlusFill size="20" className="mr-3 fill-green-500"/>{farmer.contact_number}
+                </span>
                 </td>
-                <td className="p-5 text-gray-700 text-center justify-center border">
-                  <button onClick={() => handleEdit(farmer)}>
-                    <BsPencilSquare
-                      size="24"
-                      className="hover:fill-yellow-500  mr-4"
-                    />
-                  </button>
-                  <button onClick={() => handleDelete(farmer.farmer_id)}>
-                    <BsFillTrashFill size="24" className="hover:fill-red-500" />
-                  </button>
+                <td className="p-3 flex items-center text-gray-700 text-center justify-center border-b ">
+                    <button class="py-2 px-4 rounded-xl flex items-center mr-2.5 text-xl font-navheader border-2 border-yellow-300 bg-yellow-300
+                    hover:bg-transparent hover:text-yellow-500 duration-300 hover:shadow-lg ease-in-out transition-colors hover:scale-110" 
+                    onClick={() => handleEdit(farmer)}>
+                    <BsPencilSquare size="20" className="mr-2"/>
+                      Edit
+                    </button>
+                    <button class="py-2 px-4 rounded-xl flex items-center text-xl font-navheader border-2 border-red-400 bg-red-400
+                    hover:bg-transparent hover:text-red-500 duration-300 hover:shadow-lg ease-in-out transition-colors hover:scale-110" 
+                    onClick={() => handleDelete(farmer.farmer_id)}>
+                    <BsFillTrashFill size="20" className="mr-2"/>Delete
+                    </button>
                 </td>
               </tr>
             ))}
@@ -210,5 +207,7 @@ function FarmerTable() {
     </div>
   )
 }
+
+
 
 export default FarmerTable

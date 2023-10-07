@@ -70,7 +70,7 @@ const WeatherHighlight = () => {
         </p>
       </div>
 
-      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-blue-200 duration-300 h-48 hover:text-white  ml-2 mr-2 mb-2  rounded-[20px] text-center shadow-lg bg-purple-50">
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-blue-200 hover:text-white  duration-300 h-48  ml-2 mr-2 mb-2  rounded-[20px] text-center shadow-lg bg-purple-50">
         <div className="flex m-auto p-4">
           <img src={windspeedImg} alt="humidity" className="w-12 h-12" />
           <h2 className="text-xl font-bold  p-2">WindSpeed</h2>
@@ -80,7 +80,7 @@ const WeatherHighlight = () => {
         </p>
       </div>
 
-      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-yellow-300 hover:text-white duration-300 h-48 mr-2 mt-2 bg-white rounded-[20px]  shadow-lg">
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-yellow-300 hover:text-white duration-300 h-48 ml-2 mr-2 mb-2 rounded-[20px] text-center shadow-lg bg-purple-50">
         <div className="flex m-auto p-4">
           <img src={sunriseImg} alt="humidity" className="w-12 h-12" />
           <h2 className="text-xl font-bold  p-2">Sunrise</h2>
@@ -110,7 +110,7 @@ const WeatherHighlight = () => {
         </p>
       </div>
 
-      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-gray-900 hover:text-white duration-200  h-48 mr-2 mt-2 bg-white rounded-[20px]  shadow-lg">
+      <div className="hover:-translate-y-1 hover:scale-110 hover:bg-gray-900 hover:text-white duration-200  h-48 mr-2 mt-2 bg-purple-50 rounded-[20px]  shadow-lg">
         <div className="flex m-auto p-4">
           <img src={sunsetImg} alt="humidity" className="w-12 h-12" />
           <h2 className="text-xl font-bold  p-2">Sunset</h2>

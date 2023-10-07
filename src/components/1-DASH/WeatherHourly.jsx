@@ -53,17 +53,17 @@ const WeatherHourly = () => {
     <div className="flex ">
       {hourlyData.map((hour, index) => (
         <div key={index} className="bg-white p-4 ">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col justify-center items-center">
             <h2 className="text-lg font-bold text-center text-black mb-4">
               {formatHour(hour.time)}
             </h2>
 
             <img
-              className="w-12 h-12 mr-2 mb-2 "
+              className="w-12 h-12 mr-2 mb-2 flex "
               src={getIcon(hour.values.weatherCode)}
               alt={hour.values.weatherCode}
             />
-            <p className="text-gray-600 text-center  ">
+            <p className="text-gray-600 text-center">
               {prettyPrintWeatherCode(hour.values.weatherCode)}
             </p>
           </div>

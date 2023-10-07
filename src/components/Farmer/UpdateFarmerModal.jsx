@@ -38,15 +38,16 @@ function UpdateFarmerModal({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 ">
-      <div className="bg-white shadow-lg p-6 border-2 rounded-lg w-100">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
+      <div className="bg-white shadow-lg p-6 border-2 rounded-md w-100">
+
+        <h2 className="text-2xl  font-Oswald  mb-4 flex items-center">
           <BsFillClipboardPlusFill size="24" className="fill-green-500 mr-2" />
           Edit Farmer
         </h2>
         <form onSubmit={handleModalSubmit}>
           <div className="grid grid-cols-2 gap-5">
             <div className="mt-4">
-              <label className="block mb-2">First Name</label>
+              <label className="block mb-1 text-md font-Gabarito">First Name</label>
               <input
                 type="text"
                 className="border rounded-md w-full p-2 focus:outline-none focus:border-emerald-600"
@@ -58,7 +59,7 @@ function UpdateFarmerModal({
             </div>
 
             <div className="mt-4">
-              <label className="block mb-2">Last Name</label>
+              <label className="block mb-1 text-md font-Gabarito">Last Name</label>
               <input
                 type="text"
                 className="border rounded-md w-full p-2 focus:outline-none focus:border-emerald-600"
@@ -69,12 +70,8 @@ function UpdateFarmerModal({
               />
             </div>
 
-            <div className="mt-4">
-              <label className="block mb-2 flex items-center">
-                <BsFillCalendarEventFill
-                  size="18"
-                  className="fill-green-500 mr-2"
-                />
+            <div className="mt-2">
+              <label className="block mb-1 text-md font-Gabarito flex items-center">
                 Age
               </label>
               <input
@@ -92,8 +89,8 @@ function UpdateFarmerModal({
               />
             </div>
 
-            <div className="mt-4">
-              <label className="block mb-2 flex items-center">
+            <div className="mt-2">
+              <label className="block mb-1 text-md font-Gabarito flex items-center">
                 <BsFillTelephonePlusFill
                   size="18"
                   className="fill-green-500 mr-2"
@@ -119,12 +116,14 @@ function UpdateFarmerModal({
           <div className="flex justify-end mt-4">
             <button
               type="submit"
-              className="bg-emerald-400 hover:bg-emerald-700 text-white px-4 py-2 rounded-md mr-2"
+              className="text-white text-lg font-semibold px-4 py-2 rounded-md mr-2 border-2 border-blue-500 bg-blue-500 
+              hover:bg-white hover:text-blue-500 duration-300 ease-in-out hover:scale-110 hover:shadow-lg transition-colors"
             >
               Save
             </button>
             <button
-              className="bg-gray-300 hover:bg-gray-500 px-4 py-2 rounded-md"
+              className="text-black text-lg font-semibold px-4 py-2 rounded-md border-2 border-gray-300 bg-gray-300
+              hover:bg-white duration-300 ease-in-out hover:scale-110 hover:shadow-lg transition-colors"
               onClick={handleCloseModal}
             >
               Cancel

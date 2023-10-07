@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gabarito:wght@400;700&family=Merriweather&family=Montserrat:wght@400;700&family=Open+Sans&family=Oswald&family=Roboto&family=Yanone+Kaffeesatz&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,10 +6,11 @@
 @layer components{
 
     .nav-link {
-        @apply flex items-center
+        @apply flex 
         whitespace-nowrap 
-        pl-2 pr-2 py-2 rounded-tr-3xl
-        rounded-br-3xl text-xl;
+        pl-2 pr-2 px-2 py-2 rounded-tl-xl rounded-tr-xl
+        rounded-bl-xl rounded-br-xl text-xl
+        hover:text-red-500;
     }
 
     .post {
