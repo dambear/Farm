@@ -5,10 +5,9 @@ import axios from "axios"
 import DataPanelModal from "./DataPanelModal" // Import the DataPanelModal component
 import RecipientList from "./RecipientList"
 
-import { MdAddIcCall } from "react-icons/md"
-
 function AlertA() {
   const [selectedItems, setSelectedItems] = useState([])
+  const [hoveredItem, setHoveredItem] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectAll, setSelectAll] = useState(false)
@@ -178,89 +177,75 @@ function AlertA() {
   console.log(alertType)
 
   return (
-    <div className="absolute right-0 w-4/5 h-screen">
-      <div className="bg-white h-50 text-left p-2 border-b-4">
-        <h1 className="text-2xl font-bold"># Create New Alert</h1>
+    <div className="max-w-md mx-auto my-10 p-6 bg-white rounded-md shadow-lg">
+      <h1 className="text-2xl font-bold mb-4">Select and Store Items</h1>
+
+      <DataPanelModal
+        isOpen={isModalOpen}
+        toggleModal={toggleModal}
+        selectedItems={selectedItems}
+        filteredData={filteredData}
+        handleSelectAllChange={handleSelectAllChange}
+        handleCheckboxChange={handleCheckboxChange}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        handleItemHover={handleItemHover}
+        handleItemLeave={handleItemLeave}
+      />
+
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+        onClick={toggleModal}
+      >
+        Open Modal
+      </button>
+
+      <div className="flex items-center space-x-2">
+        <label className="text-lg font-semibold">Select alert type:</label>
+        <select
+          id="fruitSelect"
+          className="p-2 border rounded-md shadow-sm focus:ring focus:ring-blue-200"
+          value={alertType}
+          onChange={handleAlertTypeChange}
+        >
+          <option value="">Select alert type</option>
+          <option value="weather">Weather</option>
+          <option value="announcement">Announcement</option>
+        </select>
       </div>
 
-      <div className=" p-6 bg-white ">
-        <DataPanelModal
-          isOpen={isModalOpen}
-          toggleModal={toggleModal}
+      <div className="mt-4">
+        <h2 className="text-lg font-bold mt-4">Recipients:</h2>
+        <RecipientList
           selectedItems={selectedItems}
           filteredData={filteredData}
-          handleSelectAllChange={handleSelectAllChange}
-          handleCheckboxChange={handleCheckboxChange}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
+          handleRemoveItem={handleRemoveItem}
           handleItemHover={handleItemHover}
-          handleItemLeave={handleItemLeave}
         />
+      </div>
 
-        <div class="w-48 bg-blue-100 rounded-lg flex items-center justify-between">
-          <div class="text-lg font-semibold">Recipients</div>
-
-          <button
-            class="bg-white px-4 py-2 rounded-md hover:bg-blue-600"
-            onClick={toggleModal}
-          >
-            <MdAddIcCall size="25" className="fill-green-400" />
-          </button>
-        </div>
-
-        <div className="mt-4 flex items-center justify-center ">
-          <RecipientList
-            selectedItems={selectedItems}
-            filteredData={filteredData}
-            handleRemoveItem={handleRemoveItem}
-            handleItemHover={handleItemHover}
-          />
-        </div>
-
-        <div className="flex items-center mt-4">
-          <label className="text-lg font-semibold">Select alert type:</label>
-          <select
-            className="ml-2 p-2 border rounded-md shadow-sm focus:ring focus:ring-blue-200"
-            value={alertType}
-            onChange={handleAlertTypeChange}
-          >
-            <option value="">Select alert type</option>
-            <option value="weather">Weather</option>
-            <option value="announcement">Announcement</option>
-          </select>
-        </div>
-
-        <div className="mt-4">
-          <h2 className="text-lg font-bold">Message:</h2>
-        </div>
-
-        <div className="mt-4 flex items-center justify-center ">
-          <div className="w-96">
-            <textarea
-              className="h-64 w-96 border rounded py-2 px-3"
-              value={message}
-              onChange={handleMessageChange}
-            />
-            <div className="text-right">
-              Character Count: {message.length}/300
-            </div>
-          </div>
-        </div>
-
-        {/* <div className="mt-4">
-        <h2 className="text-lg font-bold">Selected Items' Contact Numbers:</h2>
-        <div className="pl-4">{selectedItemsContacts}</div>
-      </div> */}
-
-        <div className="mt-3 flex items-center justify-center ">
-          <button
-            onClick={handleSubmit}
-            className="h-12 bg-emerald-400 hover:bg-emerald-700 text-white mt-4 py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300"
-          >
-            Send Message
-          </button>
+      <div className="mt-4">
+        <h2 className="text-lg font-bold">Message:</h2>
+        <textarea
+          className="w-full border rounded py-2 px-3 h-48"
+          value={message}
+          onChange={handleMessageChange}
+        />
+        <div className="text-right mt-2">
+          Character Count: {message.length}/300
         </div>
       </div>
+
+      <div className="mt-4">
+        <h2 className="text-lg font-bold">Selected Items' Contact Numbers:</h2>
+        <div className="pl-4">{selectedItemsContacts}</div>
+      </div>
+      <button
+        onClick={handleSubmit}
+        className="bg-emerald-400 hover:bg-emerald-700 text-white mt-4 py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300"
+      >
+        Send Message
+      </button>
     </div>
   )
 }

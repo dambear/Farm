@@ -1,14 +1,9 @@
 [
   {
-    "name": "John Doe",
-    "contactnumber": "123-456-7890"
-  },
-  {
-    "name": "Jane Smith",
-    "contactnumber": "987-654-3210"
-  },
-  {
-    "name": "Alice Johnson",
-    "contactnumber": "555-123-4567"
+    "alert_id": "32432423",
+    "alert_type": "weather",
+    "created_at": "October 8, 2023 at 3:42:49 PM UTC+8",
+    "message": "dali dali",
+    "recieptientInfo": "123-456-7890"
   }
 ]

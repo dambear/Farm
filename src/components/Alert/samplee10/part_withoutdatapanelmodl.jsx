@@ -199,79 +199,76 @@ function AlertA() {
         Open Modal
       </button>
 
-      <form onSubmit={handleSubmit}>
-        <div className="flex items-center space-x-2">
-          <label className="text-lg font-semibold">Select alert type:</label>
-          <select
-            id="fruitSelect"
-            className="p-2 border rounded-md shadow-sm focus:ring focus:ring-blue-200"
-            value={alertType}
-            onChange={handleAlertTypeChange}
-          >
-            <option value="">Select alert type</option>
-            <option value="weather">Weather</option>
-            <option value="announcement">Announcement</option>
-          </select>
+      <div className="flex items-center space-x-2">
+        <label className="text-lg font-semibold">Select alert type:</label>
+        <select
+          id="fruitSelect"
+          className="p-2 border rounded-md shadow-sm focus:ring focus:ring-blue-200"
+          value={alertType}
+          onChange={handleAlertTypeChange}
+        >
+          <option value="">Select alert type</option>
+          <option value="weather">Weather</option>
+          <option value="announcement">Announcement</option>
+        </select>
+      </div>
+
+      <div className="mt-4">
+        <h2 className="text-lg font-bold mt-4">Recipients:</h2>
+        <div className="pl-4 h-20 grid grid-cols-2 border-2">
+          {selectedItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center"
+              onMouseEnter={() => handleItemHover(item)}
+              onMouseLeave={handleItemLeave}
+            >
+              <div>{item}</div>
+              <button
+                className="text-red-500 ml-2"
+                onClick={() => handleRemoveItem(item)}
+              >
+                Remove
+              </button>
+              {hoveredItem === item && (
+                <span className="text-blue-600 ml-2">
+                  {
+                    filteredData.find(
+                      (itemData) =>
+                        `${itemData.first_name} ${itemData.last_name}` === item
+                    ).contact_number
+                  }
+                </span>
+              )}
+            </div>
+          ))}
         </div>
 
         <div className="mt-4">
-          <h2 className="text-lg font-bold mt-4">Recipients:</h2>
-          <div className="pl-4 h-20 grid grid-cols-2 border-2">
-            {selectedItems.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center"
-                onMouseEnter={() => handleItemHover(item)}
-                onMouseLeave={handleItemLeave}
-              >
-                <div>{item}</div>
-                <button
-                  className="text-red-500 ml-2"
-                  onClick={() => handleRemoveItem(item)}
-                >
-                  Remove
-                </button>
-                {hoveredItem === item && (
-                  <span className="text-blue-600 ml-2">
-                    {
-                      filteredData.find(
-                        (itemData) =>
-                          `${itemData.first_name} ${itemData.last_name}` ===
-                          item
-                      ).contact_number
-                    }
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-4">
-            <h2 className="text-lg font-bold">Message:</h2>
-            <textarea
-              className="w-full border rounded py-2 px-3 h-48"
-              value={message}
-              onChange={handleMessageChange}
-            />
-            <div className="text-right mt-2">
-              Character Count: {message.length}/300
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <h2 className="text-lg font-bold">
-              Selected Items' Contact Numbers:
-            </h2>
-            <div className="pl-4">{selectedItemsContacts}</div>
+          <h2 className="text-lg font-bold">Message:</h2>
+          <textarea
+            className="w-full border rounded py-2 px-3 h-48"
+            value={message}
+            onChange={handleMessageChange}
+          />
+          <div className="text-right mt-2">
+            Character Count: {message.length}/300
           </div>
         </div>
-        <button
-          type="submit"
-          className="bg-emerald-400 hover:bg-emerald-700  text-white mt-4 py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300"
-        >
-          Send Message
-        </button>
-      </form>
+
+        <div className="mt-4">
+          <h2 className="text-lg font-bold">
+            Selected Items' Contact Numbers:
+          </h2>
+          <div className="pl-4">{selectedItemsContacts}</div>
+        </div>
+      </div>
+      <button
+        onClick={handleSubmit}
+        className="bg-emerald-400 hover:bg-emerald-700  text-white mt-4 py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300"
+      >
+        Send Message
+      </button>
     </div>
   )
 }

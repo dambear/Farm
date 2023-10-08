@@ -6,6 +6,7 @@ import Alert from './pages/Alert';
 import Farmer from './pages/Farmer';
 import NewFarmer from './pages/NewFarmer';
 import SoilModule from './pages/Soil';
+import AlertHistory from './pages/AlertHistory';
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
         <Route path="/farmer" element={<Farmer />} />
         <Route path="/newfarmer" element={<NewFarmer />} />
         <Route path="/soilmodule" element={<SoilModule />} />
+
+
+
+        <Route path="/alerthistory" element={<AlertHistory/>} />
       </Routes>
     </div>
     </Router>
