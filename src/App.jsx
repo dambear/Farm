@@ -1,30 +1,27 @@
-import React from 'react';
-import Sidebar from './components/Sidebar';
-import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import Alert from './pages/Alert';
-import Farmer from './pages/Farmer';
-import NewFarmer from './pages/NewFarmer';
-import SoilModule from './pages/Soil';
-import AlertHistory from './pages/AlertHistory';
+import React from "react"
+import Sidebar from "./components/Sidebar"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Dashboard from "./pages/Dashboard"
+import AlertNew from "./pages/AlertNew"
+import Farmer from "./pages/Farmer"
+
+import SoilModule from "./pages/Soil"
+import AlertHistory from "./pages/AlertHistory"
 
 function App() {
   return (
     <Router>
-    <div className="">
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Dashboard />}/>
-        <Route path="/alert" element={<Alert />} />
-        <Route path="/farmer" element={<Farmer />} />
-        <Route path="/newfarmer" element={<NewFarmer />} />
-        <Route path="/soilmodule" element={<SoilModule />} />
+      <div className="font-Poppins">
+        <Sidebar />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/alert" element={<AlertNew />} />
+          <Route path="/farmer" element={<Farmer />} />
+          <Route path="/soilmodule" element={<SoilModule />} />
 
-
-
-        <Route path="/alerthistory" element={<AlertHistory/>} />
-      </Routes>
-    </div>
+          <Route path="/alerthistory" element={<AlertHistory />} />
+        </Routes>
+      </div>
     </Router>
   )
 }

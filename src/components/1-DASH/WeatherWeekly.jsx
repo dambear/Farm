@@ -86,7 +86,7 @@ const WeatherWeekly = () => {
             </span>
           </div>
           <h2 className="text-center font-semibold">{weekDays(daily.time)}</h2>
-          <h2 className="text-sm text-center text-gray-500 mb-4">
+          <h2 className="text-[12px] text-center text-gray-500 mb-4">
             {formatDate(daily.time)}
           </h2>
         </div>

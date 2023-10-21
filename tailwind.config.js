@@ -3,16 +3,14 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+        'farmer-preview':"url(../../src/static/farmer/bg.png)",
+        'bglines': "url(../../src/static/farmer/bglines.png)"
+      }
+    },
     fontFamily: {
-      Montserrat: ['Montserrat'],
-      Gabarito: ['Gabarito'],
-      Opensans: ['Open Sans'],
-      Roboto: ['Roboto'],
-      Oswald: ['Oswald'],
-      Bebasneue: ['Bebas Neue'],
-      Merriweather: ['Merriweather'],
-      YanoneKaffeesatz: ['Yanone Kaffeesatz']
+      Poppins: ['Poppins'],
     },
   },
   variants: {

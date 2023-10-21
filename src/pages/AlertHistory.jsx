@@ -1,14 +1,12 @@
-import React from 'react'
+import React from "react"
 
-import AlertSidebar from '../components/Alert/AlertSidebar'
-import AlertHistory from '../components/Alert/AlertHistory'
-import A from '../components/Alert/A'
+import CreateNewAlert from "../components/2-Alert/CreateNewAlert"
+import AlertHistoryView from "../components/2-Alert/AlertHistoryView"
 
 function Alert() {
   return (
-    <div className="bg-gray-300 absolute right-0 w-5/6 h-screen">
-      <AlertSidebar />
-      <A />
+    <div className="bg-bglines absolute right-0 w-5/6 h-screen">
+      <AlertHistoryView />
     </div>
   )
 }

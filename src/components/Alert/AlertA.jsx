@@ -178,12 +178,12 @@ function AlertA() {
   console.log(alertType)
 
   return (
-    <div className="absolute right-0 w-4/5 h-screen">
+    <div className=" ">
       <div className="bg-white h-50 text-left p-2 border-b-4">
         <h1 className="text-2xl font-bold"># Create New Alert</h1>
       </div>
 
-      <div className=" p-6 bg-white ">
+      <div className=" p-6 bg-[#E4E9F7] ">
         <DataPanelModal
           isOpen={isModalOpen}
           toggleModal={toggleModal}
