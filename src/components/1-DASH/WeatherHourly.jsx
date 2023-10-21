@@ -47,12 +47,12 @@ const WeatherHourly = () => {
   // Extract the date-time array from weatherData
   const weather = weatherData[0].hourly.timelines.hourly
 
-  const hourlyData = weather.slice(0, 9)
+  const hourlyData = weather.slice(0, 10)
 
   return (
     <div className="flex ">
       {hourlyData.map((hour, index) => (
-        <div key={index} className="bg-white p-4 ">
+        <div key={index} className="bg-white p-4 flex flex-col justify-center ">
           <div className="flex flex-col items-center">
             <h2 className="text-lg font-bold text-center text-black mb-4">
               {formatHour(hour.time)}
@@ -67,7 +67,7 @@ const WeatherHourly = () => {
               {prettyPrintWeatherCode(hour.values.weatherCode)}
             </p>
           </div>
-          <span className="text-blue-600 text-md font-semibold mb-4">
+          <span className="text-blue-600 text-md font-semibold mb-4 text-center ">
             {hour.values.temperature}°C
           </span>
         </div>

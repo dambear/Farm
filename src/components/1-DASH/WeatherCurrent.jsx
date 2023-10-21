@@ -50,7 +50,7 @@ const WeatherCurrent = () => {
     <div className="text-gray-800 h-full p-5 rounded-l-[20px]">
       <h2 className="text-base text-gray">Batangas City</h2>
       <h1 className="text-6xl font-bold mt-4">{weather.temperature}°C</h1>
-      <div className=" mt-4 ">
+      <div className=" mt-8 ">
         <p className="text-gray-400 font-medium">Today</p>
 
         <p className="text-xl mb-2 font-bold">

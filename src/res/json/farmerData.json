@@ -1,0 +1,24 @@
+{
+  "farmers": [
+    {
+      "farmer_id": 101,
+      "first_name": "John",
+      "last_name": "Doe",
+      "birthdate": "1980-05-15",
+      "gender": "male",
+      "contact_number": "1234567890",
+      "farmer_profile": 1,
+      "farmer_address": "123 Main St, City, Country"
+    },
+    {
+      "farmer_id": 102,
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "birthdate": "1985-08-22",
+      "gender": "female",
+      "contact_number": "9876543210",
+      "farmer_profile": 2,
+      "farmer_address": "456 Elm St, Town, Country"
+    }
+  ]
+}

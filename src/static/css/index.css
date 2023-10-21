@@ -1,61 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gabarito:wght@400;700&family=Merriweather&family=Montserrat:wght@400;700&family=Open+Sans&family=Oswald&family=Roboto&family=Yanone+Kaffeesatz&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-
-    .nav-link {
-        @apply flex 
-        whitespace-nowrap 
-        pl-2 pr-2 px-2 py-2 rounded-tl-xl rounded-tr-xl
-        rounded-bl-xl rounded-br-xl text-xl
-        hover:text-red-500;
-    }
-
-    .post {
-        @apply w-full
-        flex flex-row items-center justify-evenly
-        py-4 px-8 m-0
-        cursor-pointer;
-      }
-    
-      .post-selected {
-        @apply bg-green-400 dark:bg-gray-900
-        shadow-md;
-      }
-      .top-navigation-icon {
-        @apply text-gray-500
-        mr-3 ml-4
-        transition duration-300 ease-in-out 
-        hover:text-pink-400 
-        cursor-pointer;
-      }
-
-      /*TOOLTIP*/
-      .tooltip {
-        position: relative;
-        display: inline-block;
-      }
-
-      .tooltip .tooltip-text {
-        visibility: hidden;
-        width: max-content;
-        border-radius: 4px;
-        border: 1px solid #94a3b8;
-        padding: 4px;
-        position: absolute;
-        z-index: 10;
-        bottom: -70px;
-        left: 100%;
-        transform: translateX(-100%);
-        opacity: 0;
-        transition: opacity 0.2s, visibility 0.2s;
-      }
-
-      .tooltip:hover .tooltip-text {
-        visibility: visible;
-        opacity: 1;
-      }
-
-}
