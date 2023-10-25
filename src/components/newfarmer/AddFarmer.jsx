@@ -7,7 +7,7 @@ import cancelimg from "../../static/farmer/cancel.png"
 
 import addDataimg from "../../static/farmer/addData.png"
 
-const AddFarmer = ({ onClose }) => {
+const AddFarmer = ({ onSubmit, onClose }) => {
   // Initialize state variables
   const [first_name, setFirstName] = useState("")
   const [last_name, setLastName] = useState("")
@@ -47,7 +47,8 @@ const AddFarmer = ({ onClose }) => {
         setGender("")
         setContactNumber("")
         setFarmerAddress("")
-        onClose()
+
+        onSubmit()
       } else {
         // Handle error case
         console.error("Error adding farmer.")

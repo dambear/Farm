@@ -32,7 +32,7 @@ function Sidebar() {
         <ul className="mt-5">
           <li className="mb-2 ">
             <Link
-              to="/"
+              to="/dashboard"
               className="flex items-center  whitespace-nowrap py-[10px] px-2 w-52 font-normal
               tracking-wide rounded-lg text-[18px] hover:bg-[#AAFF00]  hover:text-white"
             >

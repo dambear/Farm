@@ -12,6 +12,9 @@ import delimg from "../../static/farmer/delete.png"
 import addimg from "../../static/farmer/add.png"
 import AddFarmer from "./AddFarmer"
 
+import SuccessCustomAlert from "../0-Notification-Alert/SuccessCustomAlert"
+import WarningCustomAlert from "../0-Notification-Alert/WarningCustomAlert"
+
 const NewFarmerTable = () => {
   const [farmerData, setFarmerData] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
@@ -20,6 +23,9 @@ const NewFarmerTable = () => {
   const [selectedFarmer, setSelectedFarmer] = useState(null)
   const [isAddFarmerModalOpen, setIsAddFarmerModalOpen] = useState(false)
   const [isUpdateFarmerModalOpen, setIsUpdateFarmerModalOpen] = useState(false)
+
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+  const [showWarningAlert, setShowWarningAlert] = useState(false)
 
   useEffect(() => {
     // Fetch farmerData using your existing fetchFarmerData function
@@ -53,7 +59,6 @@ const NewFarmerTable = () => {
     // Close the UpdateFarmer modal
     setIsAddFarmerModalOpen(false)
 
-    
     const updatedData = await fetchFarmerData() // Assuming fetchFarmerData is already defined
     setFarmerData(updatedData)
     setFilteredFarmers(updatedData) // Initially set filteredFarmers to all data
@@ -79,19 +84,26 @@ const NewFarmerTable = () => {
     setFilteredFarmers(updatedData) // Initially set filteredFarmers to all data
   }
 
-  const handleDelete = async (farmerId, e) => {
+  const openWarningCustomAlert = async (farmer, e) => {
     e.stopPropagation()
+    setSelectedFarmer(farmer)
+    setShowWarningAlert(true)
+  }
 
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this farmer?"
-    )
-
-    if (confirmed) {
+  const handleDelete = async (farmerId) => {
+    try {
+      // Instead of using window.confirm, you can directly perform the deletion.
+      // Perform deletion logic here, just like in your original function
       await deleteFarmerData(farmerId)
 
-      const updatedData = await fetchFarmerData() // Assuming fetchFarmerData is already defined
+      // After successful deletion, update the data
+      const updatedData = await fetchFarmerData()
       setFarmerData(updatedData)
-      setFilteredFarmers(updatedData) // Initially set filteredFarmers to all data
+      setFilteredFarmers(updatedData)
+    } catch (error) {
+      // Handle any potential errors, e.g., display an error message.
+      console.error("Error deleting farmer:", error)
+      // You can also set an error state and display an error message to the user.
     }
   }
 
@@ -205,7 +217,7 @@ const NewFarmerTable = () => {
                       </button>
 
                       <button
-                        onClick={(e) => handleDelete(farmer.farmer_id, e)}
+                        onClick={(e) => openWarningCustomAlert(farmer, e)}
                         className="bg-white text-red-500 border-[1px]  border-red-400 hover:bg-red-500 
                         flex hover:text-white font-sm py-1 pl-6 pr-2  rounded-3xl mr-2 shadow-md shadow-red-500/40
                         transition duration-300 ease-in-out transform hover:scale-105"
@@ -237,15 +249,13 @@ const NewFarmerTable = () => {
       )}
       {isAddFarmerModalOpen && (
         <AddFarmer
-          onSubmit={(updatedData) => {
-            // Implement your logic for handling the update here, e.g., calling an API or updating state.
-            // After handling the update, you can close the modal.
-            // For now, we'll just log the updated data.
-            console.log("Updated Farmer Data:", updatedData)
-
+          onSubmit={() => {
+            closeAddFarmerModal()
+            setShowSuccessAlert(true)
+          }}
+          onClose={() => {
             closeAddFarmerModal()
           }}
-          onClose={closeAddFarmerModal}
         />
       )}
       {isUpdateFarmerModalOpen && (
@@ -258,8 +268,33 @@ const NewFarmerTable = () => {
             console.log("Updated Farmer Data:", updatedData)
 
             closeUpdateFarmerModal()
+
+            setShowSuccessAlert(true)
           }}
           onClose={closeUpdateFarmerModal}
+        />
+      )}
+
+      {showSuccessAlert && (
+        <SuccessCustomAlert
+          message=""
+          onClose={() => {
+            setShowSuccessAlert(false)
+          }}
+        />
+      )}
+
+      {showWarningAlert && (
+        <WarningCustomAlert
+          message="Are you sure you want to delete this farmer?"
+          onYes={() => {
+            setShowWarningAlert(false)
+            handleDelete(selectedFarmer?.farmer_id) // Pass selectedFarmer's ID
+            setShowSuccessAlert(true)
+          }}
+          onNo={() => {
+            setShowWarningAlert(false)
+          }}
         />
       )}
     </div>

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react"
 import { fetchFarmerData } from "../../service/firebase/firebaseFunctions"
 import { add2MessageData } from "../../service/firebase/alertFunctions"
 import axios from "axios"
-import AddRecipientModal from "./AddRecipientModal" 
+import AddRecipientModal from "./AddRecipientModal"
 import RecipientList from "./RecipientList"
 import addimg from "../../static/farmer/add.png"
-import { MdAddIcCall } from "react-icons/md"
+
+import FailedCustomAlert from "../0-Notification-Alert/FailedCustomAlert"
+import SuccessCustomAlert from "../0-Notification-Alert/SuccessCustomAlert"
 
 function CreateNewAlert() {
   const [selectedItems, setSelectedItems] = useState([])
@@ -19,6 +21,9 @@ function CreateNewAlert() {
   const [recipientInfo, setRecipientInfo] = useState([])
   const [messageData, setMessageData] = useState([])
   const [alertType, setAlertType] = useState("")
+
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+  const [showFailedAlert, setShowFailedAlert] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -127,26 +132,23 @@ function CreateNewAlert() {
   }
 
   const sendMessage = async () => {
-    try {
-      const response = await axios.post("http://localhost:3001/send-message", {
-        number: selectedItemsContacts,
-        message,
-      })
+    const response = await axios.post("https://farmwise-backend.onrender.com", {
+      number: selectedItemsContacts,
+      message,
+    })
 
-      if (response.status === 200) {
-        console.log("Message sent successfully:", response.data)
-
-        setMessageData(response.data)
-      } else {
-        console.error("Error sending message. Status:", response.status)
-      }
-    } catch (error) {
-      console.error("Error sending message:", error)
+    if (response.status === 200) {
+      console.log("Message sent successfully:", response.data)
+      setMessageData(response.data)
+    } else {
+      console.error("Error sending message. Status:", response.status)
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    sendMessage()
 
     if (
       alertType === "" ||
@@ -154,7 +156,8 @@ function CreateNewAlert() {
       message === "" ||
       messageData === ""
     ) {
-      alert("Please fill in all required fields.")
+      setShowFailedAlert(true)
+      //alert("Please fill in all required fields.")
     } else {
       const success = await add2MessageData(
         alertType,
@@ -163,7 +166,9 @@ function CreateNewAlert() {
         messageData
       )
       if (success) {
-        alert("Alert added successfully.")
+        setShowSuccessAlert(true)
+        //alert("Alert added successfully.")
+        setShowSuccessAlert(true)
         setAlertType("")
         setRecipientInfo("")
         setMessage("")
@@ -187,7 +192,7 @@ function CreateNewAlert() {
             <div className="mb-4">
               <button
                 onClick={(e) => toggleModal()}
-                className="bg-white text-green-500 border-[1px]  border-green-400 hover:bg-green-500 ml-8
+                className="bg-white text-green-500 border-[1px]  border-green-400 hover:bg-green-500
                      flex hover:text-white font-sm py-1 pl-8 pr-2  rounded-3xl shadow-md shadow-green-500/40
                      transition duration-300 ease-in-out transform hover:scale-105"
               >
@@ -199,7 +204,9 @@ function CreateNewAlert() {
             </div>
 
             <div>
-              <label className="text-sm font-semibold text-black">Recipient:</label>
+              <label className="text-sm font-semibold text-black">
+                Recipient:
+              </label>
 
               <RecipientList
                 selectedItems={selectedItems}
@@ -249,7 +256,7 @@ function CreateNewAlert() {
 
           <div className="flex flex-col justify-center mt-4 ml-2">
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="bg-white text-blue-500 border-[1px]  border-blue-400 hover:bg-blue-500 
                         flex hover:text-white font-sm py-2 px-4 pr-2 rounded-3xl  mr-2 shadow-md shadow-blue-500/40
                         transition duration-300 ease-in-out transform hover:scale-105"
@@ -275,6 +282,24 @@ function CreateNewAlert() {
         handleItemHover={handleItemHover}
         handleItemLeave={handleItemLeave}
       />
+
+      {showSuccessAlert && (
+        <SuccessCustomAlert
+          message="Alert Created Succesfully"
+          onClose={() => {
+            setShowSuccessAlert(false)
+          }}
+        />
+      )}
+
+      {showFailedAlert && (
+        <FailedCustomAlert
+          message="Please fill in all required fields."
+          onClose={() => {
+            setShowFailedAlert(false)
+          }}
+        />
+      )}
     </div>
   )
 }

@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react"
 import { fetchAlertData } from "../../service/firebase/alertFunctions"
 
 import editimg from "../../static/farmer/edit.png"
-
 import addDataimg from "../../static/farmer/addData.png"
 
-// Define the CSS class for the alert cards
 const alertCardStyle = {
-  width: "calc(33.33% - 20px)", // Set the width to 33.33% minus margin
-  marginRight: "20px", // Add margin between the cards
+  width: "calc(33.33% - 20px)",
+  marginRight: "20px",
 }
 
 function AlertHistoryView() {
@@ -58,6 +56,7 @@ function AlertHistoryView() {
   const handleClearDateFilters = () => {
     setSelectedFromDate("")
     setSelectedToDate("")
+    setSelectedAlertType("all")
   }
 
   const toggleSortOrder = () => {
@@ -91,7 +90,6 @@ function AlertHistoryView() {
           new Date(`${selectedToDate}T23:59:59.999Z`))
   )
 
-  // Ensure there are exactly three alert cards per row
   const alertCardsPerRow = []
   for (let i = 0; i < filteredAlerts.length; i += 3) {
     const row = filteredAlerts.slice(i, i + 3)
@@ -107,7 +105,7 @@ function AlertHistoryView() {
       <div className="flex flex-col">
         <label className="text-sm font-semibold text-black">Filters:</label>
 
-        <div className="w-full flex flex-row space-x-2 py-3 border-2  justify-center rounded-3xl">
+        <div className="w-full flex flex-row space-x-2 py-3 justify-center rounded-3xl">
           <div className="space-x-2 mr-8">
             <label className="text-sm font-semibold text-black">
               Filter by Alert Type:
@@ -116,8 +114,10 @@ function AlertHistoryView() {
             <select
               className="border rounded-lg py-2 px-3 w-48
           focus:outline-none focus:ring focus:border-blue-300"
+              value={selectedAlertType}
+              onChange={handleAlertTypeChange}
             >
-              <option value="">Select alert type</option>
+              <option value="all">Select alert type</option>
               <option value="weather">Weather</option>
               <option value="announcement">Announcement</option>
             </select>
@@ -130,6 +130,8 @@ function AlertHistoryView() {
 
             <input
               type="date"
+              value={selectedFromDate}
+              onChange={handleFromDateChange}
               placeholder="From Date"
               className="border rounded-lg py-2 px-3 w-40 focus:outline-none focus:ring focus:border-blue-300"
             />
@@ -139,6 +141,8 @@ function AlertHistoryView() {
             <label className="text-sm font-semibold text-black">To Date:</label>
 
             <input
+              value={selectedToDate}
+              onChange={handleToDateChange}
               type="date"
               placeholder="To Date"
               className="border rounded-lg py-2 px-3 w-40 focus:outline-none focus:ring focus:border-blue-300"
@@ -147,6 +151,7 @@ function AlertHistoryView() {
 
           <div className="flex flex-col">
             <button
+              onClick={handleClearDateFilters}
               className="bg-white text-blue-500 border-[1px]  border-blue-400 hover:bg-blue-500 ml-8
                           flex hover:text-white font-sm py-1 pl-8 pr-2  rounded-3xl shadow-md shadow-blue-500/40
                           transition duration-300 ease-in-out transform hover:scale-105"
