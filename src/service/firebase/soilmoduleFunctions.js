@@ -1,4 +1,5 @@
 // src/service/firebase/firebaseFunctions.js
+
 import {
   getFirestore,
   collection,
@@ -48,7 +49,7 @@ function calculateSoilQualityRating(nutrientConcentrations) {
 // Function to fetch nutrientsData from a JSON file
 async function fetchNutrientsData() {
   try {
-    const response = await fetch("../../res/json/nutrients.json") // Replace with the actual path to your JSON file
+    const response = await fetch("../../../src/res/json/nutrients.json") // Replace with the actual path to your JSON file
     if (!response.ok) {
       throw new Error("Failed to fetch nutrientsData")
     }

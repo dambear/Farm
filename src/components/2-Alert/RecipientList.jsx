@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import rimg from "../../static/alert/r-img.png"
+//import rimg from "../../static/alert/r-img.png"
 import { getFImg } from "../../utils/weather/farmerUtils"
 
 function RecipientList({ selectedItems, filteredData, handleRemoveItem }) {

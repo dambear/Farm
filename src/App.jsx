@@ -8,13 +8,19 @@ import Farmer from "./pages/Farmer"
 import SoilModule from "./pages/Soil"
 import AlertHistory from "./pages/AlertHistory"
 
+import LoginPage from "./pages/LoginPage"
+
 function App() {
   return (
     <Router>
       <div className="font-Poppins">
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+
+        <Route path="/" element={<LoginPage />} />
+
+
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alert" element={<AlertNew />} />
           <Route path="/farmer" element={<Farmer />} />
           <Route path="/soilmodule" element={<SoilModule />} />

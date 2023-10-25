@@ -17,7 +17,7 @@
     "react-icon": "^1.0.0",
     "react-icons": "^4.11.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
-    "react-router-dom": "^6.15.0",
+    "react-router-dom": "^6.17.0",
     "semaphore-ph-api": "^1.0.5",
     "tailwind-scrollbar-hide": "^1.1.7"
   },

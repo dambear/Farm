@@ -79,7 +79,7 @@ const UpdateFarmer = ({ selectedFarmer, onSubmit, onClose }) => {
     try {
       await updateFarmerData(selectedFarmer.farmer_id, updatedData)
       console.log("Farmer data updated successfully.")
-      onClose()
+      onSubmit()
     } catch (error) {
       console.error("Error updating farmer data: ", error)
     }
