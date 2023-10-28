@@ -49,7 +49,7 @@ const WeatherCurrent = () => {
   return (
     <div className="text-gray-800 h-full p-5 rounded-l-[20px]">
       <h2 className="text-base text-gray">Batangas City</h2>
-      <h1 className="text-6xl font-bold mt-4">{weather.temperature}°C</h1>
+      <h1 className="text-6xl font-bold mt-4">{parseFloat(weather.temperature).toFixed(0)}°C</h1>
       <div className=" mt-8 ">
         <p className="text-gray-400 font-medium">Today</p>
 
@@ -58,6 +58,8 @@ const WeatherCurrent = () => {
         </p>
       </div>
     </div>
+
+
   )
 }
 

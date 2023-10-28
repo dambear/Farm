@@ -6,6 +6,8 @@ import loginimg from "../../src/static/farmer/logo.png"
 import FailedCustomAlert from "./0-Notification-Alert/FailedCustomAlert"
 import SuccessCustomAlert from "./0-Notification-Alert/SuccessCustomAlert"
 
+import { fetchUserData } from "../service/firebase/userFunctions"
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [password, setPassword] = useState("")
@@ -13,25 +15,25 @@ const Login = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const [showFailedAlert, setShowFailedAlert] = useState(false)
 
-  const usersData = {
-    users: [
-      {
-        username: "admin",
-        password: "admin",
-      },
-      {
-        username: "user2",
-        password: "password2",
-      },
-      // Add more users as needed
-    ],
-  }
+  const [userData, setUserData] = useState()
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchUserData()
+      setUserData(data)
+    }
+
+    fetchData()
+  }, [])
+
+
 
   const navigate = useNavigate() // Initialize useNavigate
 
   const validateUser = (e) => {
     e.preventDefault() // Prevent form submission and page refresh
-    const user = usersData.users.find((user) => user.username === username)
+    const user = userData.find((user) => user.username === username)
     if (user && user.password === password) {
       // Successful login, handle accordingly (e.g., redirect)
       setShowSuccessAlert(true)

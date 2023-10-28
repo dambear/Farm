@@ -15,6 +15,8 @@ import AddFarmer from "./AddFarmer"
 import SuccessCustomAlert from "../0-Notification-Alert/SuccessCustomAlert"
 import WarningCustomAlert from "../0-Notification-Alert/WarningCustomAlert"
 
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai"
+
 const NewFarmerTable = () => {
   const [farmerData, setFarmerData] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
@@ -26,6 +28,11 @@ const NewFarmerTable = () => {
 
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const [showWarningAlert, setShowWarningAlert] = useState(false)
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10
+  const startItemIndex = (currentPage - 1) * itemsPerPage
+  const endItemIndex = startItemIndex + itemsPerPage
 
   useEffect(() => {
     // Fetch farmerData using your existing fetchFarmerData function
@@ -41,6 +48,24 @@ const NewFarmerTable = () => {
 
     fetchData()
   }, [])
+
+
+  const goToNextPage = () => {
+    if (currentPage < Math.ceil(filteredFarmers.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const generatePageNumbers = () => {
+    const totalPages = Math.ceil(filteredFarmers.length / itemsPerPage)
+    return Array.from({ length: totalPages }, (_, index) => index + 1)
+  }
 
   // Function to calculate age from birthdate
   const calculateAge = (birthdate) => {
@@ -154,7 +179,39 @@ const NewFarmerTable = () => {
             <img className="w-6 ml-4 mt-[4px]" src={addimg} alt="" />
           </button>
         </div>
+
+        {/* this is the page nav */}
+        <div class="flex justify-center scale-90 space-x-1">
+          <button
+            class="px-2  border rounded-lg bg-white"
+            onClick={goToPreviousPage}
+            disabled={currentPage === 1}
+          >
+            <AiOutlineLeft />
+          </button>
+          {generatePageNumbers().map((page) => (
+            <button
+              key={page}
+              class={`px-4 py-2 rounded-xl ${
+                currentPage === page ? "bg-blue-500 text-white" : "bg-white"
+              } border`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            class="px-2 border rounded-lg bg-white"
+            onClick={goToNextPage}
+            disabled={
+              currentPage === Math.ceil(filteredFarmers.length / itemsPerPage)
+            }
+          >
+            <AiOutlineRight />
+          </button>
+        </div>
       </div>
+
       <div className="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto ">
         <div className="inline-block min-w-full shadow rounded-xl overflow-hidden">
           <table className="min-w-full leading-normal bg-white">
@@ -179,66 +236,73 @@ const NewFarmerTable = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredFarmers.map((farmer) => (
-                <tr
-                  key={farmer.farmer_id}
-                  className="hover:bg-gray-200 cursor-pointer"
-                  onClick={() => handleRowClick(farmer)} // Call handleRowClick when row is clicked
-                >
-                  <td className="flex justify-center py-3">
-                    <img
-                      className="w-12 h-12 rounded-full"
-                      src={getFImg(farmer.farmer_profile)}
-                      alt={farmer.farmer_profile}
-                    />
-                  </td>
+              {filteredFarmers
+                .slice(startItemIndex, endItemIndex)
+                .map((farmer) => (
+                  <tr
+                    key={farmer.farmer_id}
+                    className="hover:bg-gray-200 cursor-pointer"
+                    onClick={() => handleRowClick(farmer)} // Call handleRowClick when row is clicked
+                  >
+                    <td className="flex justify-center py-3">
+                      <img
+                        className="w-12 h-12 rounded-full"
+                        src={getFImg(farmer.farmer_profile)}
+                        alt={farmer.farmer_profile}
+                      />
+                    </td>
 
-                  <td className="text-center">{`${farmer.first_name} ${farmer.last_name}`}</td>
-                  <td className="text-center">
-                    {calculateAge(farmer.birthdate)}
-                  </td>
-                  <td className="text-center">{farmer.contact_number}</td>
-                  <td className="text-center py-4 px-6">
-                    <div className="flex flex-row justify-center">
-                      <button
-                        onClick={(e) => handleEdit(farmer, e)}
-                        className="bg-white text-blue-500 border-[1px]  border-blue-400 hover:bg-blue-500 
+                    <td className="text-center">{`${farmer.first_name} ${farmer.last_name}`}</td>
+                    <td className="text-center">
+                      {calculateAge(farmer.birthdate)}
+                    </td>
+                    <td className="text-center">{farmer.contact_number}</td>
+                    <td className="text-center py-4 px-6">
+                      <div className="flex flex-row justify-center">
+                        <button
+                          onClick={(e) => handleEdit(farmer, e)}
+                          className="bg-white text-blue-500 border-[1px]  border-blue-400 hover:bg-blue-500 
                         flex hover:text-white font-sm py-1 pl-6 pr-2  rounded-3xl mr-2 shadow-md shadow-blue-500/40
                         transition duration-300 ease-in-out transform hover:scale-105"
-                      >
-                        <span className="font-semibold text-[14px] mt-[1.5px]">
-                          UPDATE
-                        </span>{" "}
-                        <img
-                          className="w-5 ml-2 mt-[1.5px]"
-                          src={editimg}
-                          alt=""
-                        />
-                      </button>
+                        >
+                          <span className="font-semibold text-[14px] mt-[1.5px]">
+                            UPDATE
+                          </span>{" "}
+                          <img
+                            className="w-5 ml-2 mt-[1.5px]"
+                            src={editimg}
+                            alt=""
+                          />
+                        </button>
 
-                      <button
-                        onClick={(e) => openWarningCustomAlert(farmer, e)}
-                        className="bg-white text-red-500 border-[1px]  border-red-400 hover:bg-red-500 
+                        <button
+                          onClick={(e) => openWarningCustomAlert(farmer, e)}
+                          className="bg-white text-red-500 border-[1px]  border-red-400 hover:bg-red-500 
                         flex hover:text-white font-sm py-1 pl-6 pr-2  rounded-3xl mr-2 shadow-md shadow-red-500/40
                         transition duration-300 ease-in-out transform hover:scale-105"
-                      >
-                        <span className="font-semibold text-[14px] mt-[1.5px]">
-                          DELETE
-                        </span>{" "}
-                        <img
-                          className="w-5 ml-2 mt-[1.5px]"
-                          src={delimg}
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                        >
+                          <span className="font-semibold text-[14px] mt-[1.5px]">
+                            DELETE
+                          </span>{" "}
+                          <img
+                            className="w-5 ml-2 mt-[1.5px]"
+                            src={delimg}
+                            alt=""
+                          />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
+        
+
         </div>
+
+        
       </div>
+      
       {showFarmerPreview && (
         <FarmerPreview
           selectedFarmer={selectedFarmer}

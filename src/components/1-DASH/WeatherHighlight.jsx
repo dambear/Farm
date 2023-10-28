@@ -67,7 +67,7 @@ const WeatherHighlight = () => {
         </div>
 
         <p className="text-white:base text-center text-4xl font-bold">
-          {weather.temperature}°C
+          {parseFloat(weather.temperature).toFixed(0)}°C
         </p>
       </div>
 

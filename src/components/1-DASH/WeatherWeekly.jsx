@@ -29,7 +29,6 @@ const WeatherWeekly = () => {
 
   const weather = weatherData[0].weekly.timelines.daily
 
-
   // weeks
   const weekDays = (inputWeeks) => {
     const options = {
@@ -72,21 +71,23 @@ const WeatherWeekly = () => {
           key={index}
           className="bg-white rounded-3xl p-4 h-48 m-auto mx-2 shadow-md"
         >
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mt-1">
             <img
-              className="w-12 h-12 mr-2 mb-2 "
+              className="w-12 h-12 mb-2 "
               src={getIcon(daily.values.weatherCodeMax)}
               alt={daily.values.weatherCodemax}
             />
-            <p className="text-gray-600 text-center  ">
+            <p className="text-gray-600 text-center w-48 mb-2 ">
               {prettyPrintWeatherCode(daily.values.weatherCodeMax)}
             </p>
-            <span className="text-blue-600 text-xl font-semibold mb-4">
-              {daily.values.temperatureMax}°C
+            <span className="text-blue-600 text-md font-semibold ">
+              {parseFloat(daily.values.temperatureMax).toFixed(0)}°C
             </span>
           </div>
-          <h2 className="text-center font-semibold">{weekDays(daily.time)}</h2>
-          <h2 className="text-[12px] text-center text-gray-500 mb-4">
+          <h2 className="text-center font-semibold mb-1">
+            {weekDays(daily.time)}
+          </h2>
+          <h2 className="text-[12px] text-center text-gray-500 ">
             {formatDate(daily.time)}
           </h2>
         </div>
