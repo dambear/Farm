@@ -37,7 +37,7 @@ const WarningCustomAlert = ({ message, onYes, onNo }) => {
             <p className="text-[16px]">{message}</p>
           </div>
 
-          <div className="flex flex-row justify-center items-center mt-4">
+          <div className="flex flex-row justify-center items-center mt-4 space-x-2">
             <button
               onClick={onYes}
               className="bg-white w-32 text-red-500 border-[1px]  border-red-400 hover:bg-red-500 

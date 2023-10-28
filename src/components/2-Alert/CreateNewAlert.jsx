@@ -9,7 +9,11 @@ import addimg from "../../static/farmer/add.png"
 import FailedCustomAlert from "../0-Notification-Alert/FailedCustomAlert"
 import SuccessCustomAlert from "../0-Notification-Alert/SuccessCustomAlert"
 
+import { fetchWeatherData } from "../../service/firebase/weatherFunctions"
+import { prettyPrintWeatherCode } from "../../utils/weather/weatherUtils"
+
 function CreateNewAlert() {
+  const [weatherData, setWeatherData] = useState()
   const [selectedItems, setSelectedItems] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
@@ -24,6 +28,16 @@ function CreateNewAlert() {
 
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const [showFailedAlert, setShowFailedAlert] = useState(false)
+
+  // get weather data
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchWeatherData()
+      setWeatherData(data)
+    }
+
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -131,6 +145,56 @@ function CreateNewAlert() {
     setSearchQuery("")
   }
 
+  const generateWeatherSmg = () => {
+    const currentDate = new Date()
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ]
+
+    const month = months[currentDate.getMonth()]
+    const day = currentDate.getDate()
+    const year = currentDate.getFullYear()
+    const hours = currentDate.getHours()
+    const minutes = currentDate.getMinutes()
+    const ampm = hours >= 12 ? "pm" : "am"
+
+    // Adjust hours to be in 12-hour format
+    const formattedHours = hours % 12 || 12
+
+    // Use padStart to add leading zero to minutes if needed
+    const formattedMinutes = minutes.toString().padStart(2, "0")
+
+    const formattedDateTime = `${month} ${day}, ${year}, at ${formattedHours}:${formattedMinutes} ${ampm}`
+
+    console.log(formattedDateTime)
+
+    // ==================== End of Time =====================
+
+    // ==================== Start Get weather Data ============
+
+    const weather = weatherData[0].current.data.values
+
+    const weatherCondition = prettyPrintWeatherCode(weather.weatherCode)
+
+    const weatherSMG = `Good Day! As of ${formattedDateTime}, The weather in your farm area is currently ${weatherCondition} with a temperature of ${parseFloat(
+      weather.temperature
+    ).toFixed(0)}°C.`
+
+    setMessage(weatherSMG)
+  }
+
   const sendMessage = async () => {
     const response = await axios.post("https://farmwise-backend.onrender.com", {
       number: selectedItemsContacts,
@@ -189,24 +253,23 @@ function CreateNewAlert() {
       <div className="flex justify-center">
         <div className=" bg-white p-5 rounded-2xl shadow-lg">
           <div className="flex flex-col justify-center">
-            <div className="mb-4">
-              <button
-                onClick={(e) => toggleModal()}
-                className="bg-white text-green-500 border-[1px]  border-green-400 hover:bg-green-500
+            <div>
+              <div className="flex items-center space-x-4 mb-4">
+                <label className="text-sm font-semibold text-black mt-2">
+                  Recipient:
+                </label>
+                <button
+                  onClick={(e) => toggleModal()}
+                  className="bg-white text-green-500 border-[1px]  border-green-400 hover:bg-green-500
                      flex hover:text-white font-sm py-1 pl-8 pr-2  rounded-3xl shadow-md shadow-green-500/40
                      transition duration-300 ease-in-out transform hover:scale-105"
-              >
-                <span className="font-semibold text-[14px] mt-[2.5px] ">
-                  ADD NEW RECIPIENT
-                </span>
-                <img className="w-5 ml-4 mt-[2px]" src={addimg} alt="" />
-              </button>
-            </div>
-
-            <div>
-              <label className="text-sm font-semibold text-black">
-                Recipient:
-              </label>
+                >
+                  <span className="font-semibold text-[13px] mt-[2px] ">
+                    ADD NEW RECIPIENT
+                  </span>
+                  <img className="w-5 ml-4 mt-[2px]" src={addimg} alt="" />
+                </button>
+              </div>
 
               <RecipientList
                 selectedItems={selectedItems}
@@ -225,7 +288,7 @@ function CreateNewAlert() {
 
               <select
                 className="w-full border rounded px-3 py-2 mt-1 border-gray-400
-            focus:outline-none focus:ring focus:border-blue-300"
+                focus:outline-none focus:ring focus:border-blue-300"
                 value={alertType}
                 onChange={handleAlertTypeChange}
               >
@@ -236,9 +299,22 @@ function CreateNewAlert() {
             </div>
 
             <div className="mt-4">
-              <label className="text-sm font-semibold text-black">
-                Message:
-              </label>
+              <div className="flex items-center space-x-4 mb-4">
+                <label className="text-sm font-semibold text-black">
+                  Message:
+                </label>
+                <button
+                  onClick={(e) => generateWeatherSmg()}
+                  className="bg-white text-green-500 border-[1px]  border-green-400 hover:bg-green-500
+                     flex hover:text-white font-sm py-1 pl-8 pr-2  rounded-3xl shadow-md shadow-green-500/40
+                     transition duration-300 ease-in-out transform hover:scale-105"
+                >
+                  <span className="font-semibold text-[13px] mt-[2px] ">
+                    GENERATE WEATHER MESSAGE
+                  </span>
+                  <img className="w-5 ml-4 mt-[2px]" src={addimg} alt="" />
+                </button>
+              </div>
 
               <textarea
                 className="w-full h-32 border rounded px-3 py-2 mt-1 border-gray-400

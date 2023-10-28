@@ -50,26 +50,37 @@ const WeatherHourly = () => {
   const hourlyData = weather.slice(0, 10)
 
   return (
-    <div className="flex ">
+    <div className="flex">
       {hourlyData.map((hour, index) => (
-        <div key={index} className="bg-white p-4 flex flex-col justify-center ">
-          <div className="flex flex-col items-center">
-            <h2 className="text-lg font-bold text-center text-black mb-4">
-              {formatHour(hour.time)}
-            </h2>
+        <div key={index} className="bg-white my-4 flex flex-row justify-center">
+          <div className="flex flex-col items-center justify-center w-28 text-center ">
 
-            <img
-              className="w-12 h-12 mr-2 mb-2 "
-              src={getIcon(hour.values.weatherCode)}
-              alt={hour.values.weatherCode}
-            />
-            <p className="text-gray-600 text-center  ">
-              {prettyPrintWeatherCode(hour.values.weatherCode)}
-            </p>
+            <div className="">
+              <h2 className=" font-bold text-center text-black ">
+                {formatHour(hour.time)}
+              </h2>
+            </div>
+
+            <div>
+              <img
+                className="w-10 mb-1 "
+                src={getIcon(hour.values.weatherCode)}
+                alt={hour.values.weatherCode}
+              />
+            </div>
+
+            <div className="mb-1">
+              <p className="text-gray-600 text-center text-sm ">
+                {prettyPrintWeatherCode(hour.values.weatherCode)}
+              </p>
+            </div>
+
+            <div>
+              <span className="text-blue-600 text-sm font-semibold text-center ">
+                {parseFloat(hour.values.temperature).toFixed(0)}°C
+              </span>
+            </div>
           </div>
-          <span className="text-blue-600 text-md font-semibold mb-4 text-center ">
-            {hour.values.temperature}°C
-          </span>
         </div>
       ))}
     </div>

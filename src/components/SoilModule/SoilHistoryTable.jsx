@@ -5,6 +5,8 @@ import editimg from "../../static/farmer/edit.png"
 import addimg from "../../static/farmer/add.png"
 import AddSoilData from "./AddSoilData"
 
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai"
+
 function SoilHistoryTable() {
   const [soilData, setSoilData] = useState([])
   const [selectedNutrientData, setSelectedNutrientData] = useState(null)
@@ -15,6 +17,9 @@ function SoilHistoryTable() {
   const [selectedFromDate, setSelectedFromDate] = useState("")
   const [selectedToDate, setSelectedToDate] = useState("")
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10 // Adjust the number of items per page as needed
+
   useEffect(() => {
     async function fetchData() {
       const data = await fetchSoilData()
@@ -23,6 +28,27 @@ function SoilHistoryTable() {
 
     fetchData()
   }, [])
+
+  // Create a function to go to the previous page
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  // Create a function to go to the next page
+  const goToNextPage = () => {
+    const totalPages = Math.ceil(filteredSoilData.length / itemsPerPage)
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  // Create a function to generate an array of page numbers
+  const generatePageNumbers = () => {
+    const totalPages = Math.ceil(filteredSoilData.length / itemsPerPage)
+    return Array.from({ length: totalPages }, (_, index) => index + 1)
+  }
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value)
@@ -36,6 +62,7 @@ function SoilHistoryTable() {
     setSelectedToDate(event.target.value)
   }
 
+  // Filtering and pagination
   const filteredSoilData = soilData.filter((item) => {
     const landNameMatch = item.fland_name
       .toLowerCase()
@@ -88,6 +115,12 @@ function SoilHistoryTable() {
     setSoilData(updatedData)
   }
 
+  const totalPages = Math.ceil(filteredSoilData.length / itemsPerPage)
+
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentData = filteredSoilData.slice(startIndex, endIndex)
+
   return (
     <div className="mx-8 py-6">
       <div className="flex justify-between items-center">
@@ -110,6 +143,35 @@ function SoilHistoryTable() {
               ADD SOIL DATA
             </span>{" "}
             <img className="w-6 ml-4 mt-[4px]" src={addimg} alt="" />
+          </button>
+        </div>
+
+        {/* this is the page nav */}
+        <div className="flex justify-center space-x-1">
+          <button
+            className="px-2 border rounded-lg bg-white"
+            onClick={goToPreviousPage}
+            disabled={currentPage === 1}
+          >
+            <AiOutlineLeft />
+          </button>
+          {generatePageNumbers().map((page) => (
+            <button
+              key={page}
+              className={`px-4 py-2 rounded-xl ${
+                currentPage === page ? "bg-blue-500 text-white" : "bg-white"
+              } border`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className="px-2 border rounded-lg bg-white"
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages}
+          >
+            <AiOutlineRight />
           </button>
         </div>
       </div>
@@ -177,7 +239,7 @@ function SoilHistoryTable() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {filteredSoilData.map((item) => (
+              {currentData.map((item) => (
                 <tr className="hover:bg-gray-200 cursor-pointer" key={item.id}>
                   <td className="text-center py-2">{item.fland_name}</td>
                   <td className="text-center py-2">{item.fland_location}</td>

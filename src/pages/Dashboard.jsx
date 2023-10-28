@@ -24,11 +24,11 @@ function Home() {
           className="bg-gradient-to-r from-[#F5FAD1] via-teal-100 to-cyan-100 flex items-center 
         justify-center relative  rounded-[20px] "
         >
-          <div className="h-60 w-1/4 ">
+          <div className="h-60 w-1/6 ml-2">
             <WeatherCurrent />
           </div>
 
-          <div className="h-60 w-3/4">
+          <div className="h-60 w-5/6 mr-6">
             <WeatherWeekly />
           </div>
         </div>
