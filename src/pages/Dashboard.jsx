@@ -9,17 +9,14 @@ import WeatherHourly from "../components/1-DASH/WeatherHourly"
 
 import bglines from "../static/farmer/bglines.png"
 
-function Home() {
+function Dashboard() {
   useEffect(() => {
     checkAndUpdateWeatherData()
   }, [])
 
   return (
-    <div className="absolute right-0 bg-bglines w-5/6 h-[100vh">
-      <img className=" absolute" src={bglines} alt="" />
+    <div className="absolute right-0 bg-bglines w-5/6 h-[100vh ">
       <div className="container mx-auto p-7">
-      
-
         <div
           className="bg-gradient-to-r from-[#F5FAD1] via-teal-100 to-cyan-100 flex items-center 
         justify-center relative  rounded-[20px] "
@@ -59,4 +56,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Dashboard

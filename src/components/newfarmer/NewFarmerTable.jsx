@@ -156,7 +156,7 @@ const NewFarmerTable = () => {
   }
 
   return (
-    <div className="mx-8 py-6 ">
+    <div className="mx-8 py-6  ">
       <div className=" flex justify-between items-center">
         <div className="flex flex-row ">
           <input

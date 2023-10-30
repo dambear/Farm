@@ -244,13 +244,14 @@ function CreateNewAlert() {
     }
   }
 
+  // generate/sign token
+
+
   return (
     <div className="mx-8 py-6 ">
-      <div className="mb-4">
-        <span className="text-3xl font-bold">DASHBOARD</span>
-      </div>
 
-      <div className="flex justify-center">
+
+      <div className="flex justify-center mt-14">
         <div className=" bg-white p-5 rounded-2xl shadow-lg">
           <div className="flex flex-col justify-center">
             <div>

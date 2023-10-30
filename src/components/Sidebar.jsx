@@ -4,6 +4,7 @@ import {
   AiOutlineAppstore,
   AiOutlineUser,
   AiOutlineSetting,
+  AiOutlineLogout,
 } from "react-icons/ai"
 
 import { HiOutlineBellAlert } from "react-icons/hi2"
@@ -91,13 +92,15 @@ function Sidebar() {
               <PiPlant size="24" className="mr-5 ml-3" /> Soil Module
             </Link>
           </li>
-          <li className="mb-2">
+   
+
+          <li className="mt-72">
             <a
               href="#"
               className="flex items-center  whitespace-nowrap py-[10px] px-2 w-52 font-normal
               tracking-wide rounded-lg text-[18px] hover:bg-[#AAFF00]  hover:text-white"
             >
-              <AiOutlineSetting size="24" className="mr-5 ml-3" /> Setting
+              <AiOutlineLogout size="24" className="mr-5 ml-3" /> Logout
             </a>
           </li>
         </ul>
