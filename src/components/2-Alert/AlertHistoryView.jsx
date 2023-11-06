@@ -32,6 +32,10 @@ function AlertHistoryView() {
       year: "numeric",
       month: "long",
       day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+      timeZone: 'Asia/Manila',  //Set to Philippines timezone
     }
 
     const formattedDate = new Date(

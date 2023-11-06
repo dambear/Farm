@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Sidebar from "./components/Sidebar"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Dashboard from "./pages/Dashboard"
@@ -13,9 +13,32 @@ import {
 } from "./components/routingprotections/RoutingProtections"
 
 function App() {
+  const [scaleClass, setScaleClass] = useState("")
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth
+
+      if (screenWidth <= 1200) {
+        setScaleClass("scale-80")
+      } else if (screenWidth <= 1300) {
+        setScaleClass("scale-90")
+      } else {
+        setScaleClass("")
+      }
+    }
+
+    window.addEventListener("resize", handleResize)
+    handleResize() // Initial check
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
   return (
     <Router>
-      <div className="font-Poppins">
+      <div className={`font-Poppins ${scaleClass}`}>
         <Routes>
           <Route
             path="/"

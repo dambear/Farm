@@ -17,7 +17,6 @@ const Login = () => {
 
   const [userData, setUserData] = useState()
 
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchUserData()
@@ -27,8 +26,6 @@ const Login = () => {
     fetchData()
   }, [])
 
-
-
   const navigate = useNavigate() // Initialize useNavigate
 
   const login = async () => {
@@ -36,13 +33,16 @@ const Login = () => {
 
     if (user && user.password === password) {
       try {
-        const response = await fetch("http://localhost:3001/generate-token", {
-          method: "POST", // Change the method to POST
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username: user.username}),
-        })
+        const response = await fetch(
+          "https://farmwise-backend.onrender.com/generate-token",
+          {
+            method: "POST", // Change the method to POST
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username: user.username }),
+          }
+        )
 
         if (response.ok) {
           const data = await response.json()
@@ -68,12 +68,12 @@ const Login = () => {
   }
 
   // const validateUser = (e) => {
-    
+
   //   e.preventDefault() // Prevent form submission and page refresh
   //   const user = userData.find((user) => user.username === username)
   //   if (user && user.password === password) {
   //     // Successful login, handle accordingly (e.g., redirect)
-      
+
   //     setShowSuccessAlert(true)
   //     console.log("Login Successful")
   //   } else {
@@ -175,7 +175,7 @@ const Login = () => {
           message="Login Success."
           onClose={() => {
             setShowSuccessAlert(false)
-            navigate('/dashboard');
+            navigate("/dashboard")
           }}
         />
       )}

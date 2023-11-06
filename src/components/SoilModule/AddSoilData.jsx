@@ -42,7 +42,7 @@ function AddSoilData({ onClose }) {
             </div>
 
             <span className="text-center text-xl font-medium mt-3 ml-2">
-              Add Farmer Data
+              Add Soil Data
             </span>
           </div>
 
@@ -88,7 +88,7 @@ function AddSoilData({ onClose }) {
                         transition duration-300 ease-in-out transform hover:scale-105"
                 >
                   <span className="font-semibold text-[14px] mt-[1.5px] ml-24">
-                    ADD_FARMER
+                    ADD SOIL DATA
                   </span>
                   <img
                     className="w-5 mt-[1.5px] ml-[70px]"

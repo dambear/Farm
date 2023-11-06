@@ -9,10 +9,13 @@ import addimg from "../../static/farmer/add.png"
 import FailedCustomAlert from "../0-Notification-Alert/FailedCustomAlert"
 import SuccessCustomAlert from "../0-Notification-Alert/SuccessCustomAlert"
 
+import editimg from "../../static/farmer/edit.png"
+
 import { fetchWeatherData } from "../../service/firebase/weatherFunctions"
 import { prettyPrintWeatherCode } from "../../utils/weather/weatherUtils"
 
 function CreateNewAlert() {
+  const [hovereditem, setHoveredItem] = useState()
   const [weatherData, setWeatherData] = useState()
   const [selectedItems, setSelectedItems] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -190,16 +193,21 @@ function CreateNewAlert() {
 
     const weatherSMG = `Good Day! As of ${formattedDateTime}, The weather in your farm area is currently ${weatherCondition} with a temperature of ${parseFloat(
       weather.temperature
-    ).toFixed(0)}°C.`
+    ).toFixed(0)}°C. Also the current humidity is ${
+      weather.humidity
+    }% and the windspeed is ${weather.windSpeed}mph`
 
     setMessage(weatherSMG)
   }
 
   const sendMessage = async () => {
-    const response = await axios.post("https://farmwise-backend.onrender.com", {
-      number: selectedItemsContacts,
-      message,
-    })
+    const response = await axios.post(
+      "https://farmwise-backend.onrender.com/send-message",
+      {
+        number: selectedItemsContacts,
+        message,
+      }
+    )
 
     if (response.status === 200) {
       console.log("Message sent successfully:", response.data)
@@ -246,11 +254,8 @@ function CreateNewAlert() {
 
   // generate/sign token
 
-
   return (
     <div className="mx-8 py-6 ">
-
-
       <div className="flex justify-center mt-14">
         <div className=" bg-white p-5 rounded-2xl shadow-lg">
           <div className="flex flex-col justify-center">
@@ -304,17 +309,20 @@ function CreateNewAlert() {
                 <label className="text-sm font-semibold text-black">
                   Message:
                 </label>
-                <button
-                  onClick={(e) => generateWeatherSmg()}
-                  className="bg-white text-green-500 border-[1px]  border-green-400 hover:bg-green-500
+
+                {alertType === "weather" && (
+                  <button
+                    onClick={(e) => generateWeatherSmg()}
+                    className="bg-white text-green-500 border-[1px]  border-green-400 hover:bg-green-500
                      flex hover:text-white font-sm py-1 pl-8 pr-2  rounded-3xl shadow-md shadow-green-500/40
                      transition duration-300 ease-in-out transform hover:scale-105"
-                >
-                  <span className="font-semibold text-[13px] mt-[2px] ">
-                    GENERATE WEATHER MESSAGE
-                  </span>
-                  <img className="w-5 ml-4 mt-[2px]" src={addimg} alt="" />
-                </button>
+                  >
+                    <span className="font-semibold text-[13px] mt-[2px] ">
+                      GENERATE WEATHER MESSAGE
+                    </span>
+                    <img className="w-5 ml-4 mt-[2px]" src={addimg} alt="" />
+                  </button>
+                )}
               </div>
 
               <textarea
@@ -341,7 +349,7 @@ function CreateNewAlert() {
               <span className="font-semibold text-[14px] mt-[3px] ml-44">
                 SEND MESSAGE
               </span>
-              <img className="w-6 ml-36" src={addimg} alt="" />
+              <img className="w-6 ml-36" src={editimg} alt="" />
             </button>
           </div>
         </div>
