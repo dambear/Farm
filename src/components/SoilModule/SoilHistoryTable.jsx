@@ -147,7 +147,7 @@ function SoilHistoryTable() {
         </div>
 
         {/* this is the page nav */}
-        <div className="flex justify-center space-x-1">
+        <div className="flex justify-center space-x-1 scale-90">
           <button
             className="px-2 border rounded-lg bg-white"
             onClick={goToPreviousPage}

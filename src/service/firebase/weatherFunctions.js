@@ -1,4 +1,5 @@
 // Import necessary Firebase Firestore functions and axios
+
 import {
   doc,
   setDoc,
@@ -74,11 +75,12 @@ export const checkAndUpdateWeatherData = async () => {
       if (
         currentDate.getDate() !== created_at.getDate() ||
         currentDate.getMonth() !== created_at.getMonth() ||
-        currentDate.getFullYear() !== created_at.getFullYear()
+        currentDate.getFullYear() !== created_at.getFullYear() ||
+        currentDate.getHours() !== created_at.getHours()
       ) {
         // If not, update weather data
         await addWeatherData()
-        console.log("Weather data updated.")
+        console.log("Weather data updated in 5mins.")
       } else {
         console.log("Weather data is up to date.")
       }

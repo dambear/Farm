@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage:{
-        'farmer-preview':"url(../../src/static/farmer/bg.png)",
-        'bglines': "url(../../src/static/farmer/bglines.png)"
+        'farmer-preview':"url(/src/static/farmer/bg.png)",
+        'bglines': "url(/src/static/farmer/bglines.png)"
       }
     },
     fontFamily: {

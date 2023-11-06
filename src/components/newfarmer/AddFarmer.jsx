@@ -205,7 +205,7 @@ const AddFarmer = ({ onSubmit, onClose }) => {
                         transition duration-300 ease-in-out transform hover:scale-105"
                 >
                   <span className="font-semibold text-[14px] mt-[1.5px] ml-24">
-                    ADD_FARMER
+                    ADD FARMER
                   </span>
                   <img
                     className="w-5 mt-[1.5px] ml-[70px]"

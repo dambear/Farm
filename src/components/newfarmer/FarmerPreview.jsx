@@ -27,77 +27,89 @@ const FarmerPreview = ({ onClose, farmerData, farmerId }) => {
   }
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
-      <div className="w-1/3 rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl rounded-br-3xl shadow-xl ">
-        <div
-          className="bg-no-repeat bg-cover bg-farmer-preview
-        rounded-tl-3xl rounded-tr-3xl h-28 px-8 flex items-center"
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="modal-overlay fixed inset-0 bg-black opacity-50"></div>
 
+      <div className="modal-container bg-white  w-[550px] mx-auto rounded-3xl shadow-lg z-50">
+        <div className="modal-content ">
+          <div
+            className="bg-no-repeat bg-cover bg-farmer-preview
+        rounded-tl-3xl rounded-tr-3xl h-28 flex items-center p-6"
+          >
+            <img
+              className="w-16 h-16 object-cover rounded-full"
+              src={getFImg(selectedFarmerData.farmer_profile)}
+              alt={selectedFarmerData.farmer_profile}
+            />
+            <div className="flex">
+              <div className="flex flex-col items-center">
+                <p className="ml-4 text-2xl font-semibold">{`${selectedFarmerData.first_name} ${selectedFarmerData.last_name}`}</p>
 
-        >
-          <img
-            className="w-16 h-16 object-cover rounded-full"
-            src={getFImg(selectedFarmerData.farmer_profile)}
-            alt={selectedFarmerData.farmer_profile}
-          />
-          <div className="flex">
-            <div className="flex flex-col items-center">
-              <p className="ml-4 text-2xl font-semibold">{`${selectedFarmerData.first_name} ${selectedFarmerData.last_name}`}</p>
-
-              <div className="bg-gradient-to-t from-slate-900 via-slate-900 to-slate-800 text-white rounded-lg px-2">
-                <p className="text-[14px] font-semibold">Farmer</p>
+                <div className="bg-gradient-to-t from-slate-900 via-slate-900 to-slate-800 text-white rounded-lg px-2">
+                  <p className="text-[14px] font-semibold">Farmer</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-white px-8 pt-4 pb-4 rounded-bl-3xl rounded-br-3xl ">
-          <h2 className="text-[16px] font-bold text-gray-500">INFORMATION</h2>
-          <div className="text-[18px] font-semibold ">
-            <table className="w-full h-80 mt-2">
-              <tbody>
-                <tr>
-                  <td className="w-1/2 text-[16px] text-gray-500">Farmer ID</td>
-                  <td className="w-1/2">{farmerId}</td>
-                </tr>
-                <tr>
-                  <td className="w-1/2 text-[16px] text-gray-500">
-                    First Name
-                  </td>
-                  <td className="w-1/2">{selectedFarmerData.first_name}</td>
-                </tr>
-                <tr>
-                  <td className="w-1/2 text-[16px] text-gray-500">Last Name</td>
-                  <td className="w-1/2">{selectedFarmerData.last_name}</td>
-                </tr>
-                <tr>
-                  <td className="w-1/2 text-[16px] text-gray-500">Birthdate</td>
-                  <td className="w-1/2">{selectedFarmerData.birthdate}</td>
-                </tr>
-                <tr>
-                  <td className="w-1/2 text-[16px] text-gray-500">Gender</td>
-                  <td className="w-1/2">{selectedFarmerData.gender}</td>
-                </tr>
-                <tr>
-                  <td className="w-1/2 text-[16px] text-gray-500">
-                    Contact Number
-                  </td>
-                  <td className="w-1/2">{selectedFarmerData.contact_number}</td>
-                </tr>
-                <tr>
-                  <td className="w-1/2 text-[16px] text-gray-500">Address</td>
-                  <td className="w-1/2">{selectedFarmerData.farmer_address}</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="bg-white px-8 pt-4 pb-4 rounded-bl-3xl rounded-br-3xl ">
+            <h2 className="text-[16px] font-bold text-gray-500">INFORMATION</h2>
+            <div className="text-[18px]">
+              <table className="w-full h-80 mt-2">
+                <tbody>
+                  <tr>
+                    <td className="w-1/2 text-[16px] text-gray-500">
+                      Farmer ID
+                    </td>
+                    <td className="w-1/2">{farmerId}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-1/2 text-[16px] text-gray-500">
+                      First Name
+                    </td>
+                    <td className="w-1/2">{selectedFarmerData.first_name}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-1/2 text-[16px] text-gray-500">
+                      Last Name
+                    </td>
+                    <td className="w-1/2">{selectedFarmerData.last_name}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-1/2 text-[16px] text-gray-500">
+                      Birthdate
+                    </td>
+                    <td className="w-1/2">{selectedFarmerData.birthdate}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-1/2 text-[16px] text-gray-500">Gender</td>
+                    <td className="w-1/2">{selectedFarmerData.gender}</td>
+                  </tr>
+                  <tr>
+                    <td className="w-1/2 text-[16px] text-gray-500">
+                      Contact Number
+                    </td>
+                    <td className="w-1/2">
+                      {selectedFarmerData.contact_number}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="w-1/2 text-[16px] text-gray-500">Address</td>
+                    <td className="w-1/2">
+                      {selectedFarmerData.farmer_address}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <button
+              onClick={onClose}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+            >
+              Close
+            </button>
           </div>
-
-          <button
-            onClick={onClose}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-          >
-            Close
-          </button>
         </div>
       </div>
     </div>

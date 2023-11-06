@@ -17,7 +17,6 @@ const Login = () => {
 
   const [userData, setUserData] = useState()
 
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchUserData()
@@ -27,22 +26,61 @@ const Login = () => {
     fetchData()
   }, [])
 
-
-
   const navigate = useNavigate() // Initialize useNavigate
 
-  const validateUser = (e) => {
-    e.preventDefault() // Prevent form submission and page refresh
+  const login = async () => {
     const user = userData.find((user) => user.username === username)
+
     if (user && user.password === password) {
-      // Successful login, handle accordingly (e.g., redirect)
-      setShowSuccessAlert(true)
-      console.log("Login Successful")
+      try {
+        const response = await fetch(
+          "https://farmwise-backend.onrender.com/generate-token",
+          {
+            method: "POST", // Change the method to POST
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username: user.username }),
+          }
+        )
+
+        if (response.ok) {
+          const data = await response.json()
+          const token = data.token
+          // Store the token in localStorage or a secure storage mechanism
+          localStorage.setItem("token", token)
+
+          setShowSuccessAlert(true)
+          console.log("Login Successful")
+          navigate("/dashboard")
+        } else {
+          console.log("Login Failed")
+          setShowFailedAlert(true)
+        }
+      } catch (error) {
+        console.error("Error logging in:", error)
+        setShowFailedAlert(true)
+      }
     } else {
       console.log("Login Failed")
       setShowFailedAlert(true)
     }
   }
+
+  // const validateUser = (e) => {
+
+  //   e.preventDefault() // Prevent form submission and page refresh
+  //   const user = userData.find((user) => user.username === username)
+  //   if (user && user.password === password) {
+  //     // Successful login, handle accordingly (e.g., redirect)
+
+  //     setShowSuccessAlert(true)
+  //     console.log("Login Successful")
+  //   } else {
+  //     console.log("Login Failed")
+  //     setShowFailedAlert(true)
+  //   }
+  // }
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -60,7 +98,7 @@ const Login = () => {
           </div>
 
           <div className="flex flex-col mx-4">
-            <form onSubmit={validateUser}>
+            <form onSubmit={login}>
               <div>
                 <input
                   type="text"
@@ -119,7 +157,8 @@ const Login = () => {
 
               <div className="flex justify-center">
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={login}
                   className="bg-white mt-4 mb-2 w-36 text-green-500 border-[1px]  border-green-400 hover:bg-green-500 
                         flex justify-center hover:text-white font-sm py-2 rounded-3xl  shadow-md shadow-green-500/40
                         transition duration-300 ease-in-out transform hover:scale-105"
@@ -136,7 +175,7 @@ const Login = () => {
           message="Login Success."
           onClose={() => {
             setShowSuccessAlert(false)
-            navigate('/dashboard');
+            navigate("/dashboard")
           }}
         />
       )}

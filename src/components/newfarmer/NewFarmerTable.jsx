@@ -156,7 +156,7 @@ const NewFarmerTable = () => {
   }
 
   return (
-    <div className="mx-8 py-6 ">
+    <div className="mx-8 py-6  ">
       <div className=" flex justify-between items-center">
         <div className="flex flex-row ">
           <input
@@ -181,9 +181,9 @@ const NewFarmerTable = () => {
         </div>
 
         {/* this is the page nav */}
-        <div class="flex justify-center scale-90 space-x-1">
+        <div className="flex justify-center scale-90 space-x-1">
           <button
-            class="px-2  border rounded-lg bg-white"
+            className="px-2  border rounded-lg bg-white"
             onClick={goToPreviousPage}
             disabled={currentPage === 1}
           >
@@ -192,7 +192,7 @@ const NewFarmerTable = () => {
           {generatePageNumbers().map((page) => (
             <button
               key={page}
-              class={`px-4 py-2 rounded-xl ${
+              className={`px-4 py-2 rounded-xl ${
                 currentPage === page ? "bg-blue-500 text-white" : "bg-white"
               } border`}
               onClick={() => setCurrentPage(page)}
@@ -201,7 +201,7 @@ const NewFarmerTable = () => {
             </button>
           ))}
           <button
-            class="px-2 border rounded-lg bg-white"
+            className="px-2 border rounded-lg bg-white"
             onClick={goToNextPage}
             disabled={
               currentPage === Math.ceil(filteredFarmers.length / itemsPerPage)

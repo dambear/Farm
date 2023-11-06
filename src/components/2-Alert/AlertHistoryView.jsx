@@ -32,6 +32,10 @@ function AlertHistoryView() {
       year: "numeric",
       month: "long",
       day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+      timeZone: 'Asia/Manila',  //Set to Philippines timezone
     }
 
     const formattedDate = new Date(
@@ -98,11 +102,9 @@ function AlertHistoryView() {
 
   return (
     <div className="mx-8 py-6 ">
-      <div className="mb-4">
-        <span className="text-3xl font-bold">DASHBOARD</span>
-      </div>
+    
 
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-4">
         <label className="text-sm font-semibold text-black">Filters:</label>
 
         <div className="w-full flex flex-row space-x-2 py-3 justify-center rounded-3xl">
@@ -179,7 +181,7 @@ function AlertHistoryView() {
         </button>
       </div>
 
-      <div className="flex justify-center mt-4 h-[495px]">
+      <div className="flex justify-center mt-4 h-[530px]">
         <div className=" bg-white w-full rounded-2xl shadow-lg p-4 overflow-auto">
           {alertCardsPerRow.map((row, rowIndex) => (
             <div key={rowIndex} className="flex justify-center ">
