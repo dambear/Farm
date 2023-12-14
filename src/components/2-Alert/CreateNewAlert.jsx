@@ -191,11 +191,11 @@ function CreateNewAlert() {
 
     const weatherCondition = prettyPrintWeatherCode(weather.weatherCode)
 
-    const weatherSMG = `Good Day! As of ${formattedDateTime}, The weather in your farm area is currently ${weatherCondition} with a temperature of ${parseFloat(
+    const weatherSMG = `Magandang araw! ${formattedDateTime} ang panahon sa inyong farm area ay ${weatherCondition} na may temperatura na ${parseFloat(
       weather.temperature
-    ).toFixed(0)}°C. Also the current humidity is ${
+    ).toFixed(0)}°C. Ang kasalukuyang humidity ay nasa ${
       weather.humidity
-    }% and the windspeed is ${weather.windSpeed}mph`
+    }% at ang bilis ng hangin ay ${weather.windSpeed}mph`
 
     setMessage(weatherSMG)
   }
